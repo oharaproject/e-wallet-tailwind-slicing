@@ -1,0 +1,39 @@
+export interface CustomButtonProps {
+  variant: "primary" | "secondary" | "outline";
+  size: "lg" | "sm";
+  title: string;
+  leftIcon?: string;
+  rightIcon?: string;
+  iconSize?: "sm" | "md" | "lg" | "xl";
+  isDisabled?: boolean;
+  handleClick?: () => void;
+}
+
+export interface CustomInputProps {
+  id: string;
+  type: "text" | "email" | "password" | "number" | "search" | "tel" | "url";
+  label: string;
+  placeholder: string;
+  hint?: string;
+  value: string;
+  isInvalid?: boolean;
+  leftIcon?: string;
+  rightIcon?: string;
+  disabled?: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface CardListProps {
+  title: string;
+  linkText: string;
+  linkHref: string;
+  children: React.ReactNode;
+}
+
+export interface ListItemProps {
+  iconClass: string;
+  title: string;
+  description: string;
+  rightText: number | string;
+  href: string;
+}

@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;0,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+/* ---------------------------------------------------------- */
+
+/* custom button base styles */
+.custom-btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl font-semibold uppercase focus:outline-none focus:ring-2 disabled:cursor-not-allowed;
+}
+
+/* button variants */
+
+.btn-primary {
+  @apply bg-brands-light-green text-white hover:bg-brands-dark-green focus:ring-green-400 disabled:bg-gray-200 disabled:text-gray-400;
+}
+
+.btn-secondary {
+  @apply bg-white text-brands-light-green hover:bg-emerald-50 focus:ring-green-400 disabled:bg-gray-200 disabled:text-gray-400;
+}
+
+.btn-outline {
+  @apply border-2 border-brands-light-green text-brands-light-green bg-transparent hover:bg-brands-light-green hover:text-white focus:ring-green-400 disabled:border-gray-300 disabled:bg-transparent disabled:text-gray-400;
+}
+
+/* size variants */
+
+.btn-lg {
+  @apply p-2.5 text-sm;
+}
+
+.btn-sm {
+  @apply p-2 text-xs;
+}
+
+/* icon size */
+
+.icon-md {
+  @apply text-icon-md;
+}
+
+.icon-sm {
+  @apply text-icon-sm;
+}
+
+/* ---------------------------------------------------------- */
+
+/* input field base styles */
+
+.custom-input {
+  @apply w-full rounded-2xl border bg-white p-3 text-sm ps-12 pe-12 focus:outline-none focus:ring-2 disabled:border-gray-300 disabled:bg-gray-100;
+}
+
+/* input field states */
+.custom-input::placeholder {
+  @apply text-gray-400;
+}
+
+.input-default {
+  @apply border-gray-400 text-gray-900 placeholder:text-gray-400 focus:ring-green-400;
+}
+
+.input-invalid {
+  @apply bg-red-200 text-red-900 caret-red-900 focus:ring-red-900;
+}
+
+.icon-default {
+  @apply text-gray-400;
+}
+
+.icon-invalid {
+  @apply text-red-400 peer-focus:text-red-900;
+}
+
+/* hint text styles */
+
+.input-hint {
+  @apply ps-4 text-xs text-gray-900;
+}
+
+/* label styles */
+
+.input-label {
+  @apply ps-4 text-sm font-medium uppercase text-gray-900;
+}
+
+/* ---------------------------------------------------------- */
+
+/* Card List Container Styles */
+
+.card-container {
+  @apply rounded-[20px] bg-white shadow-md overflow-hidden;
+}
+
+/* Card Header Styles */
+
+.card-header {
+  @apply flex justify-between items-center p-6 bg-white;
+}
+
+.card-header-title {
+  @apply font-semibold text-gray-900;
+}
+
+.card-header-link {
+  @apply text-brands-light-green text-xs font-semibold hover:text-brands-light-green/70 focus:ring-2 focus:ring-green-400 focus:outline-none;
+}
+
+/* List Item Styles */
+
+.list-item {
+  @apply flex justify-between items-center rounded-[20px] p-3 hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300;
+}
+
+.list-item-left {
+  @apply flex items-center gap-5;
+}
+
+.list-item-icon {
+  @apply text-icon-lg text-brands-light-green flex-shrink-0;
+}
+
+.list-item-content {
+  @apply flex flex-col;
+}
+
+.list-item-title {
+  @apply line-clamp-2 text-sm font-semibold text-gray-900;
+}
+
+.list-item-description {
+  @apply line-clamp-1 text-xs text-gray-500;
+}
+
+.list-item-right {
+  @apply flex items-center gap-2;
+}
+
+.list-item-right-text {
+  @apply text-xs font-medium;
+}
+
+.list-item-right-icon {
+  @apply text-icon-md text-gray-900;
+}
+
+/* Divider Styles */
+
+.divider {
+  @apply h-[1px] w-full bg-gray-300 my-2.5;
+}
+
+/* Empty State Styles */
+
+.empty-state {
+  @apply text-center py-6 text-gray-500 text-sm italic;
+}
+
+/*---------------------------------------------------------- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 2s ease-in-out;
+}
