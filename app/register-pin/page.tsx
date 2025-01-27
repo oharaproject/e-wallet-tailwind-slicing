@@ -5,7 +5,7 @@ import { CustomButton, CustomInput } from "@/components";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Register() {
+export default function RegisterPin() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isEmailInvalid, setIsEmailInvalid] = useState(false);
@@ -65,6 +65,7 @@ export default function Register() {
           size="lg"
           title="Lanjutkan"
           rightIcon="i-material-symbols-chevron-right-rounded"
+          containerStyles=""
           handleClick={() => {}}
         />
 

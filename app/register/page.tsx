@@ -65,6 +65,7 @@ export default function Register() {
           size="lg"
           title="Lanjutkan"
           rightIcon="i-material-symbols-chevron-right-rounded"
+          containerStyles=""
           handleClick={() => {}}
         />
 

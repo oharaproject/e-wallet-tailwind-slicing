@@ -5,6 +5,7 @@ export interface CustomButtonProps {
   leftIcon?: string;
   rightIcon?: string;
   iconSize?: "sm" | "md" | "lg" | "xl";
+  containerStyles: string;
   isDisabled?: boolean;
   handleClick?: () => void;
 }

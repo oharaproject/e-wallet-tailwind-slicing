@@ -5,7 +5,7 @@ import { CustomButton } from "@/components";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Register() {
+export default function RegisterEmail() {
   return (
     <div className="container mx-auto max-w-[768px] h-screen bg-green-50 flex flex-col items-center justify-center px-4">
       <Image
@@ -34,6 +34,7 @@ export default function Register() {
           size="lg"
           title="KIRIM ULANG"
           leftIcon="i-material-symbols-send-rounded text-icon-md"
+          containerStyles=""
           handleClick={() => {}}
         />
       </form>
