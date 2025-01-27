@@ -63,3 +63,37 @@ export const userData = {
   name: "John Doe",
   balance: 56094343,
 };
+
+export const transactionStatusData = {
+  transactionId: "KS08387847",
+  amount: -300000,
+  category: "Uang Keluar",
+  recipient: "Jane Dane",
+  bank: "BCA",
+  accountNumber: "594576747746",
+  transactionTime: "20 Juni 2024 19:00 WIB",
+  status: "Transaksi Berhasil Diproses",
+};
+
+export const statusConfig = {
+  "Transaksi Berhasil Diproses": {
+    backgroundColor: "bg-brands-light-green",
+    icon: "i-material-symbols-receipt-rounded",
+  },
+  "Transaksi Sedang Diproses": {
+    backgroundColor: "bg-gray-950", // #9CA3AF
+    icon: "i-material-symbols-close",
+  },
+  "Transaksi Dibatalkan": {
+    backgroundColor: "bg-yellow-400", // #FBBF24
+    icon: "i-material-symbols-help-rounded",
+  },
+  "Sistem Gagal Memproses Transaksi": {
+    backgroundColor: "bg-red-500", // #EF4444
+    icon: "i-material-symbols-help-rounded",
+  },
+  "Transaksi Kadaluarsa": {
+    backgroundColor: "bg-pink-400", // #FB7185
+    icon: "i-material-symbols-help-rounded",
+  },
+};

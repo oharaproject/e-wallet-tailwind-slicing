@@ -13,7 +13,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="container md:max-w-md mx-auto min-h-screen bg-green-50 p-4 pb-24 flex flex-col gap-2">
+    <div className="container md:max-w-md mx-auto min-h-screen bg-green-50 p-4 pb-[80px] flex flex-col gap-2">
       <div className="flex">
         <Link
           href="#"

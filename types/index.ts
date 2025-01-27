@@ -38,3 +38,7 @@ export interface ListItemProps {
   rightText: number | string;
   href: string;
 }
+
+export interface AppbarProps {
+  title: string;
+}
