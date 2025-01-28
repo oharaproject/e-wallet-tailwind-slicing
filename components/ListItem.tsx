@@ -10,9 +10,9 @@ const ListItem = ({
 }: ListItemProps) => {
   const formattedRightText =
     typeof rightText === "number"
-      ? `${rightText < 0 ? "-" : ""}Rp ${new Intl.NumberFormat("id-ID").format(
-          Math.abs(rightText)
-        )}`
+      ? `${rightText < 0 ? "- " : "+ "}Rp ${new Intl.NumberFormat(
+          "id-ID"
+        ).format(Math.abs(rightText))}`
       : rightText;
 
   const textColorClass =
