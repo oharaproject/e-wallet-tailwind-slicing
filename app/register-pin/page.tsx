@@ -18,7 +18,7 @@ export default function RegisterPin() {
   };
 
   return (
-    <div className="container mx-auto max-w-[768px] h-screen bg-green-50 flex flex-col items-center justify-center px-4">
+    <div className="register-container">
       <Image
         src="/fingerprint.svg"
         alt="Finger Print Illustration"
@@ -28,16 +28,14 @@ export default function RegisterPin() {
         className="h-[160px] w-auto"
       />
 
-      <div className="mb-5 mt-8 flex flex-col items-center">
-        <h1 className="text-lg font-semibold text-gray-900 text-center">
-          Buat 6 Digit Pin
-        </h1>
-        <p className="text-xs font-medium text-gray-400 text-center">
+      <div className="register-title-container">
+        <h1 className="register-title">Buat 6 Digit Pin</h1>
+        <p className="register-subtitle">
           Buatlah 6 digit PIN untuk masuk lebih aman
         </p>
       </div>
 
-      <form className="flex flex-col gap-4 w-full">
+      <form className="register-form">
         <div className="mb-2">
           <CustomInput
             id="password"
@@ -71,17 +69,11 @@ export default function RegisterPin() {
 
         <p className="mt-3 text-xs text-center text-gray-400">
           Dengan masuk atau daftar, Anda sudah setuju dengan{" "}
-          <Link
-            href="#"
-            className="text-brands-light-green font-semibold hover:text-brands-light-green/70 focus:outline-none focus:ring-2 focus:ring-green-400"
-          >
+          <Link href="#" className="page-description">
             Ketentuan layanan{" "}
           </Link>
           dan{" "}
-          <Link
-            href="#"
-            className="text-brands-light-green font-semibold hover:text-brands-light-green/70 focus:outline-none focus:ring-2 focus:ring-green-400"
-          >
+          <Link href="#" className="page-description">
             Kebijakan Privasi{" "}
           </Link>
           KUSAKU

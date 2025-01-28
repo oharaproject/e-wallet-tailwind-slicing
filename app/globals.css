@@ -14,8 +14,10 @@
 }
 
 /* ---------------------------------------------------------- */
+/* CUSTOM BUTTON STYLES */
 
 /* custom button base styles */
+
 .custom-btn {
   @apply inline-flex items-center justify-center gap-2 rounded-xl font-semibold uppercase focus:outline-none focus:ring-2 disabled:cursor-not-allowed;
 }
@@ -55,6 +57,90 @@
 }
 
 /* ---------------------------------------------------------- */
+/* NAVBAR STYLES */
+
+/* navbar button styles */
+
+.btn-beranda {
+  @apply flex w-full flex-col items-center p-3 text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-400;
+}
+
+.btn-history {
+  @apply flex w-full flex-col items-center p-3 text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-400;
+}
+
+.btn-account {
+  @apply flex w-full flex-col items-center p-3 text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-400;
+}
+
+/* navbar icons styles */
+
+.icon-beranda-first {
+  @apply i-material-symbols-home-outline-rounded;
+}
+
+.icon-beranda-first-style {
+  @apply text-icon-md inline group-hover:hidden;
+}
+
+.icon-beranda-second {
+  @apply i-material-symbols-home-rounded;
+}
+
+.icon-beranda-second-style {
+  @apply text-icon-md hidden group-hover:inline;
+}
+
+.icon-history-first {
+  @apply i-material-symbols-receipt-outline-rounded;
+}
+
+.icon-history-first-style {
+  @apply text-icon-md inline group-hover:hidden;
+}
+
+.icon-history-second {
+  @apply i-material-symbols-receipt-rounded;
+}
+
+.icon-history-second-style {
+  @apply text-icon-md hidden group-hover:inline;
+}
+
+.icon-account-first {
+  @apply i-material-symbols-person-outline-rounded;
+}
+
+.icon-account-first-style {
+  @apply text-icon-md inline group-hover:hidden;
+}
+
+.icon-account-second {
+  @apply i-material-symbols-person-rounded;
+}
+
+.icon-account-second-style {
+  @apply text-icon-md hidden group-hover:inline;
+}
+
+/* ---------------------------------------------------------- */
+
+/* APPBAR STYLES */
+
+.appbar-container {
+  @apply flex fixed top-0 left-0 z-10 w-full items-center gap-5 bg-white p-4 text-gray-900;
+}
+
+.btn-appbar {
+  @apply hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400;
+}
+
+.icon-appbar {
+  @apply i-material-symbols-arrow-left-alt-rounded text-icon-md block;
+}
+
+/* ---------------------------------------------------------- */
+/* INPUT STYLES */
 
 /* input field base styles */
 
@@ -96,8 +182,7 @@
 }
 
 /* ---------------------------------------------------------- */
-
-/* Card List Container Styles */
+/* CARD LIST STYLES */
 
 .card-container {
   @apply rounded-[20px] bg-white shadow-md overflow-hidden;
@@ -117,7 +202,7 @@
   @apply text-brands-light-green text-xs font-semibold hover:text-brands-light-green/70 focus:ring-2 focus:ring-green-400 focus:outline-none;
 }
 
-/* List Item Styles */
+/* LIST ITEM STYLES */
 
 .list-item {
   @apply flex justify-between items-center rounded-[20px] p-3 hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300;
@@ -169,6 +254,8 @@
 
 /*---------------------------------------------------------- */
 
+/* LOGO SIMPLE ANIMATION */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -178,6 +265,157 @@
   }
 }
 
+/*---------------------------------------------------------- */
+
+/*---------------------------------------------------------- */
+/* PAGE SPLASH STYLES */
+
+.splash-container {
+  @apply container mx-auto max-w-[768px] h-screen bg-brands-light-green flex flex-col items-center justify-center;
+}
+
+.splash-title {
+  @apply font-sans absolute bottom-9 text-3xl font-bold uppercase text-[#3ed6b8] animate-fadeIn;
+}
+
+/*---------------------------------------------------------- */
+/*  PAGE STATUS TRANSACTION STYLES */
+
 .animate-fadeIn {
   animation: fadeIn 2s ease-in-out;
 }
+
+/* status transaction container style */
+
+.status-transaction-container {
+  @apply container md:max-w-md mx-auto min-h-screen bg-green-50 pb-[80px] flex flex-col gap-2;
+}
+
+/* statu transaction content style */
+
+.status-content {
+  @apply absolute mt-[92px] flex flex-col w-full gap-10 p-4;
+}
+
+/* status title & description style */
+
+.status-title {
+  @apply text-center text-lg font-semibold text-white;
+}
+
+.status-description {
+  @apply text-center text-xs text-white mt-2;
+}
+
+/* detail transaction style */
+
+.detail-transaction-container {
+  @apply flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-md;
+}
+
+.id-transaction {
+  @apply text-right text-xs text-gray-900;
+}
+
+.amount {
+  @apply text-center text-2xl font-bold text-gray-900;
+}
+
+.subcontainer {
+  @apply flex justify-between;
+}
+
+.status-subtitle {
+  @apply text-xs text-gray-500;
+}
+
+.detail-transaction {
+  @apply text-xs font-semibold text-gray-900;
+}
+
+/* navbar container styles */
+
+.navbar-container {
+  @apply fixed bottom-0 left-0 w-full py-3 shadow-md;
+}
+
+/* status-transaction color */
+
+.bg-brands-transaction-processed {
+  @apply bg-[#9CA3AF];
+}
+
+.bg-brands-transaction-canceled {
+  @apply bg-[#FBBF24];
+}
+
+.bg-brands-transaction-canceled-title {
+  @apply text-gray-900;
+}
+
+.bg-brands-transaction-failed {
+  @apply bg-[#EF4444];
+}
+
+.bg-brands-transaction-expired {
+  @apply bg-[#FB7185];
+}
+
+/*---------------------------------------------------------- */
+/* PAGE REGISTER STYLES */
+
+.register-container {
+  @apply container mx-auto max-w-[768px] h-screen bg-green-50 flex flex-col items-center justify-center px-4;
+}
+
+.register-title-container {
+  @apply mb-5 mt-8 flex flex-col items-center;
+}
+
+.register-title {
+  @apply text-lg font-semibold text-gray-900 text-center;
+}
+
+.register-subtitle {
+  @apply text-xs font-medium text-gray-400 text-center;
+}
+
+.register-form {
+  @apply flex flex-col gap-4 w-full;
+}
+
+.page-description {
+  @apply text-brands-light-green font-semibold hover:text-brands-light-green/70 focus:outline-none focus:ring-2 focus:ring-green-400;
+}
+/*---------------------------------------------------------- */
+/* PAGE DASHBOARD STYLES */
+
+.dashboard-container {
+  @apply container md:max-w-md mx-auto min-h-screen bg-green-50 p-4 pb-[80px] flex flex-col gap-2;
+}
+
+.user-link {
+  @apply flex items-center gap-2 mb-4 hover:opacity-70 focus:outline-none focus:ring-2 focus:ring-green-400;
+}
+
+.user-name {
+  @apply text-lg font-semibold text-gray-900;
+}
+
+.background-container {
+  @apply h-[165px] flex flex-col bg-gradient-to-b from-brands-light-green to-emerald-400 rounded-2xl text-white p-5 justify-between;
+}
+
+.app-title {
+  @apply text-2xl font-bold uppercase;
+}
+
+.user-balance {
+  @apply flex items-center gap-2 mt-4;
+}
+
+.btn-dashboard {
+  @apply flex gap-3 mt-2 mb-6;
+}
+
+/*---------------------------------------------------------- */

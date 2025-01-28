@@ -18,7 +18,7 @@ export default function Register() {
   };
 
   return (
-    <div className="container mx-auto max-w-[768px] h-screen bg-green-50 flex flex-col items-center justify-center px-4">
+    <div className="register-container">
       <Image
         src="/logo-green.svg"
         alt="Kusaku Logo"
@@ -28,16 +28,14 @@ export default function Register() {
         className="h-[160px] w-auto"
       />
 
-      <div className="mb-5 mt-8 flex flex-col items-center">
-        <h1 className="text-lg font-semibold text-gray-900 text-center">
-          Buat Akun Baru
-        </h1>
-        <p className="text-xs font-medium text-gray-400 text-center">
+      <div className="register-title-container">
+        <h1 className="register-titler">Buat Akun Baru</h1>
+        <p className="register-subtitle">
           Hanya beberapa langkah untuk buat akun baru Anda
         </p>
       </div>
 
-      <form className="flex flex-col gap-4 w-full">
+      <form className="register-form">
         <div className="mb-2">
           <CustomInput
             id="name"
@@ -71,10 +69,7 @@ export default function Register() {
 
         <p className="mt-3 text-xs text-center text-gray-400">
           Sudah punya akun?{" "}
-          <Link
-            href="#"
-            className="text-brands-light-green font-semibold hover:text-brands-light-green/70 focus:outline-none focus:ring-2 focus:ring-green-400"
-          >
+          <Link href="#" className="page-description">
             Masuk dengan akun saya
           </Link>
         </p>

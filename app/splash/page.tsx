@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Splash = () => {
   return (
-    <div className="container mx-auto max-w-[768px] h-screen bg-brands-light-green flex flex-col items-center justify-center">
+    <div className="splash-container">
       <Image
         src="/logo-white.svg"
         alt="Kusaku Logo"
@@ -13,9 +13,7 @@ const Splash = () => {
         priority
       />
 
-      <h1 className="font-sans absolute bottom-9 text-3xl font-bold uppercase text-[#3ed6b8] animate-fadeIn">
-        Kusaku
-      </h1>
+      <h1 className="splash-title">Kusaku</h1>
     </div>
   );
 };

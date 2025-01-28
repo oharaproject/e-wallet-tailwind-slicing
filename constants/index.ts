@@ -72,28 +72,49 @@ export const transactionStatusData = {
   bank: "BCA",
   accountNumber: "594576747746",
   transactionTime: "20 Juni 2024 19:00 WIB",
-  status: "Transaksi Berhasil Diproses",
+  status: "Transaksi Kadaluarsa",
 };
 
-export const statusConfig = {
+export const statusConfig: Record<
+  string,
+  {
+    backgroundColor: string;
+    textColor?: string;
+    buttonTitle: string;
+    icon: string;
+    statusDescription: string | null;
+  }
+> = {
   "Transaksi Berhasil Diproses": {
     backgroundColor: "bg-brands-light-green",
+    buttonTitle: "Lihat Transaksi Lainnya",
     icon: "i-material-symbols-receipt-rounded",
+    statusDescription: null,
   },
   "Transaksi Sedang Diproses": {
-    backgroundColor: "bg-gray-950", // #9CA3AF
-    icon: "i-material-symbols-close",
+    backgroundColor: "bg-brands-transaction-processed",
+    buttonTitle: "Batalkan Transaksi",
+    icon: "i-material-symbols-cancel-sharp",
+    statusDescription: null,
   },
   "Transaksi Dibatalkan": {
-    backgroundColor: "bg-yellow-400", // #FBBF24
+    backgroundColor: "bg-brands-transaction-canceled",
+    textColor: "bg-brands-transaction-canceled-title",
+    buttonTitle: "Butuh Bantuan?",
     icon: "i-material-symbols-help-rounded",
+    statusDescription: "Dana sudah dikembalikan ke saldo Anda",
   },
   "Sistem Gagal Memproses Transaksi": {
-    backgroundColor: "bg-red-500", // #EF4444
+    backgroundColor: "bg-brands-transaction-failed",
+    buttonTitle: "Butuh Bantuan?",
     icon: "i-material-symbols-help-rounded",
+    statusDescription: "Dana sudah dikembalikan ke saldo Anda",
   },
   "Transaksi Kadaluarsa": {
-    backgroundColor: "bg-pink-400", // #FB7185
+    backgroundColor: "bg-brands-transaction-expired",
+    buttonTitle: "Butuh Bantuan?",
     icon: "i-material-symbols-help-rounded",
+    statusDescription:
+      "Anda sudah melewati batas waktu transaksi yang diharapkan",
   },
 };

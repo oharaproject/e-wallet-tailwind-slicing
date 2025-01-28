@@ -1,6 +1,6 @@
 import React from "react";
 import { Appbar, CustomButton, Navbar } from "@/components";
-import { transactionStatusData } from "@/constants";
+import { transactionStatusData, statusConfig } from "@/constants";
 
 export default function StatusTransaction() {
   const {
@@ -14,54 +14,61 @@ export default function StatusTransaction() {
     status,
   } = transactionStatusData;
 
+  const { backgroundColor, textColor, buttonTitle, icon, statusDescription } =
+    statusConfig[status] || {
+      backgroundColor: "bg-gray-200",
+      textColor: "text-white",
+      buttonTitle: "Butuh Bantuan?",
+      icon: "i-material-symbols-help-rounded",
+      statusDescription: null,
+    };
+
   const formattedAmount =
     typeof amount === "number"
       ? `${amount < 0 ? "- " : ""}Rp ${new Intl.NumberFormat("id-ID").format(
           Math.abs(amount)
         )}`
       : amount;
+
   return (
-    <div className="container md:max-w-md mx-auto min-h-screen bg-green-50 pb-[80px] flex flex-col gap-2">
+    <div className="status-transaction-container">
       <Appbar title="Status Transaksi" />
 
-      <div className="bg-brands-light-green relative h-[260px]"></div>
+      <div className={`${backgroundColor} relative h-[260px]`}></div>
 
-      <div className="absolute mt-[92px] flex flex-col w-full gap-10 p-4">
+      <div className="status-content">
         <div className="flex flex-col">
-          <h1 className="text-center text-lg font-semibold text-white">
-            {status}
-          </h1>
+          <h1 className={`status-title ${textColor}`}>{status}</h1>
+          {statusDescription && (
+            <p className={`status-description ${textColor}`}>
+              {statusDescription}
+            </p>
+          )}
         </div>
 
-        <div className="flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-md">
-          <p className="text-right text-xs text-gray-900">{`ID Transaksi ${transactionId}`}</p>
-          <p className="text-center text-2xl font-bold text-gray-900">
-            {formattedAmount}
-          </p>
+        <div className="detail-transaction-container">
+          <p className="id-transaction">{`ID Transaksi ${transactionId}`}</p>
+          <p className="amount">{formattedAmount}</p>
           <div className="flex flex-col gap-2">
-            <div className="flex justify-between">
-              <p className="text-xs text-gray-500">Kategori</p>
-              <p className="text-xs font-semibold text-gray-900">{category}</p>
+            <div className="subcontainer">
+              <p className="status-subtitle">Kategori</p>
+              <p className="detail-transaction">{category}</p>
             </div>
-            <div className="flex justify-between">
-              <p className="text-xs text-gray-500">Penerima</p>
-              <p className="text-xs font-semibold text-gray-900">{recipient}</p>
+            <div className="subcontainer">
+              <p className="status-subtitle">Penerima</p>
+              <p className="detail-transaction">{recipient}</p>
             </div>
-            <div className="flex justify-between">
-              <p className="text-xs text-gray-500">Bank Penerima</p>
-              <p className="text-xs font-semibold text-gray-900">{bank}</p>
+            <div className="subcontainer">
+              <p className="status-subtitle">Bank Penerima</p>
+              <p className="detail-transaction">{bank}</p>
             </div>
-            <div className="flex justify-between">
-              <p className="text-xs text-gray-500">Nomor Rekening</p>
-              <p className="text-xs font-semibold text-gray-900">
-                {accountNumber}
-              </p>
+            <div className="subcontainer">
+              <p className="status-subtitle">Nomor Rekening</p>
+              <p className="detail-transaction">{accountNumber}</p>
             </div>
-            <div className="flex justify-between">
-              <p className="text-xs text-gray-500">Waktu Transaksi</p>
-              <p className="text-xs font-semibold text-gray-900">
-                {transactionTime}
-              </p>
+            <div className="subcontainer">
+              <p className="status-subtitle">Waktu Transaksi</p>
+              <p className="detail-transaction">{transactionTime}</p>
             </div>
           </div>
         </div>
@@ -70,13 +77,13 @@ export default function StatusTransaction() {
           variant="outline"
           size="lg"
           iconSize="md"
-          title="Lihat Transaksi Lainnya"
-          leftIcon="i-material-symbols-receipt-rounded text-icon-md"
+          title={buttonTitle}
+          leftIcon={`${icon} text-icon-md`}
           containerStyles=""
         />
       </div>
 
-      <div className="fixed bottom-0 left-0 w-full py-3 shadow-md">
+      <div className="navbar-container">
         <Navbar />
       </div>
     </div>
