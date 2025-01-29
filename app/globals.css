@@ -61,15 +61,7 @@
 
 /* navbar button styles */
 
-.btn-beranda {
-  @apply flex w-full flex-col items-center p-3 text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-400;
-}
-
-.btn-history {
-  @apply flex w-full flex-col items-center p-3 text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-400;
-}
-
-.btn-account {
+.btn-navbar {
   @apply flex w-full flex-col items-center p-3 text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-400;
 }
 
@@ -79,47 +71,31 @@
   @apply i-material-symbols-home-outline-rounded;
 }
 
-.icon-beranda-first-style {
-  @apply text-icon-md inline group-hover:hidden;
-}
-
 .icon-beranda-second {
   @apply i-material-symbols-home-rounded;
-}
-
-.icon-beranda-second-style {
-  @apply text-icon-md hidden group-hover:inline;
 }
 
 .icon-history-first {
   @apply i-material-symbols-receipt-outline-rounded;
 }
 
-.icon-history-first-style {
-  @apply text-icon-md inline group-hover:hidden;
-}
-
 .icon-history-second {
   @apply i-material-symbols-receipt-rounded;
-}
-
-.icon-history-second-style {
-  @apply text-icon-md hidden group-hover:inline;
 }
 
 .icon-account-first {
   @apply i-material-symbols-person-outline-rounded;
 }
 
-.icon-account-first-style {
-  @apply text-icon-md inline group-hover:hidden;
-}
-
 .icon-account-second {
   @apply i-material-symbols-person-rounded;
 }
 
-.icon-account-second-style {
+.icon-navbar-first {
+  @apply text-icon-md inline group-hover:hidden;
+}
+
+.icon-navbar-second {
   @apply text-icon-md hidden group-hover:inline;
 }
 
@@ -266,12 +242,24 @@
 }
 
 /*---------------------------------------------------------- */
+/* SPLASH & REGISTER PAGE CONTAINER STYLES */
+
+.page-container {
+  @apply container mx-auto max-w-[768px] h-screen flex flex-col items-center justify-center;
+}
+
+/*---------------------------------------------------------- */
+/* DASHBOARD, STATUS TRANSACTION, TRANSACTION HISTORY PAGE CONTAINER STYLES */
+
+.transaction-container {
+  @apply container md:max-w-md mx-auto min-h-screen bg-green-50 pb-[80px] flex flex-col gap-2 p-4;
+}
 
 /*---------------------------------------------------------- */
 /* PAGE SPLASH STYLES */
 
 .splash-container {
-  @apply container mx-auto max-w-[768px] h-screen bg-brands-light-green flex flex-col items-center justify-center;
+  @apply page-container bg-brands-light-green;
 }
 
 .splash-title {
@@ -283,12 +271,6 @@
 
 .animate-fadeIn {
   animation: fadeIn 2s ease-in-out;
-}
-
-/* status transaction container style */
-
-.status-transaction-container {
-  @apply container md:max-w-md mx-auto min-h-screen bg-green-50 pb-[80px] flex flex-col gap-2;
 }
 
 /* statu transaction content style */
@@ -341,23 +323,22 @@
 
 /* status-transaction color */
 
-.bg-brands-transaction-processed {
+.bg-status-processed {
   @apply bg-[#9CA3AF];
 }
 
-.bg-brands-transaction-canceled {
+.bg-status-canceled {
   @apply bg-[#FBBF24];
 }
-
-.bg-brands-transaction-canceled-title {
+.bg-status-canceled-text {
   @apply text-gray-900;
 }
 
-.bg-brands-transaction-failed {
+.bg-status-failed {
   @apply bg-[#EF4444];
 }
 
-.bg-brands-transaction-expired {
+.bg-status-expired {
   @apply bg-[#FB7185];
 }
 
@@ -365,7 +346,7 @@
 /* PAGE REGISTER STYLES */
 
 .register-container {
-  @apply container mx-auto max-w-[768px] h-screen bg-green-50 flex flex-col items-center justify-center px-4;
+  @apply page-container bg-green-50 px-4;
 }
 
 .register-title-container {
@@ -389,10 +370,6 @@
 }
 /*---------------------------------------------------------- */
 /* PAGE DASHBOARD STYLES */
-
-.dashboard-container {
-  @apply container md:max-w-md mx-auto min-h-screen bg-green-50 p-4 pb-[80px] flex flex-col gap-2;
-}
 
 .user-link {
   @apply flex items-center gap-2 mb-4 hover:opacity-70 focus:outline-none focus:ring-2 focus:ring-green-400;
@@ -420,3 +397,13 @@
 
 /*---------------------------------------------------------- */
 /* PAGE TRANSACTION HISTORY STYLES */
+
+.transaction-history {
+  @apply rounded-s-2xl bg-white shadow-md mt-20 overflow-hidden rounded-2xl px-2.5;
+}
+
+.notransaction-text {
+  @apply text-center items-center text-gray-500 text-sm italic m-5;
+}
+
+/* --------------------------------------------------------- */

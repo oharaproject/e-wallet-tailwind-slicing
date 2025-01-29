@@ -73,7 +73,7 @@ export const transactionStatusData = {
   bank: "BCA",
   accountNumber: "594576747746",
   transactionTime: "20 Juni 2024 19:00 WIB",
-  status: "Transaksi Kadaluarsa",
+  status: "Transaksi Dibatalkan",
 };
 
 export const statusConfig: Record<
@@ -93,26 +93,26 @@ export const statusConfig: Record<
     statusDescription: null,
   },
   "Transaksi Sedang Diproses": {
-    backgroundColor: "bg-brands-transaction-processed",
+    backgroundColor: "bg-status-processed",
     buttonTitle: "Batalkan Transaksi",
     icon: "i-material-symbols-cancel-sharp",
     statusDescription: null,
   },
   "Transaksi Dibatalkan": {
-    backgroundColor: "bg-brands-transaction-canceled",
-    textColor: "bg-brands-transaction-canceled-title",
+    backgroundColor: "bg-status-canceled",
+    textColor: "bg-status-canceled-text",
     buttonTitle: "Butuh Bantuan?",
     icon: "i-material-symbols-help-rounded",
     statusDescription: "Dana sudah dikembalikan ke saldo Anda",
   },
   "Sistem Gagal Memproses Transaksi": {
-    backgroundColor: "bg-brands-transaction-failed",
+    backgroundColor: "bg-status-failed",
     buttonTitle: "Butuh Bantuan?",
     icon: "i-material-symbols-help-rounded",
     statusDescription: "Dana sudah dikembalikan ke saldo Anda",
   },
   "Transaksi Kadaluarsa": {
-    backgroundColor: "bg-brands-transaction-expired",
+    backgroundColor: "bg-status-expired",
     buttonTitle: "Butuh Bantuan?",
     icon: "i-material-symbols-help-rounded",
     statusDescription:
@@ -152,5 +152,174 @@ export const accountMenuItems = [
     description: "",
     rightText: "",
     link: "/about",
+  },
+];
+
+// export const accountSettingsSections = [
+//   {
+//     id: "personal-info",
+//     title: "Informasi Personal",
+//     fields: [
+//       {
+//         id: "name",
+//         label: "Nama",
+//         type: "text",
+//         placeholder: "Masukan Nama",
+//         icon: "i-material-symbols-person-rounded",
+//       },
+//       {
+//         id: "email",
+//         label: "Email",
+//         type: "text",
+//         placeholder: "Masukan Email",
+//         icon: "i-material-symbols-mail-rounded",
+//       },
+//     ],
+//   },
+//   {
+//     id: "security-pin",
+//     title: "Keamanan PIN",
+//     fields: [
+//       {
+//         id: "old-pin",
+//         label: "PIN Lama",
+//         type: "password",
+//         placeholder: "Masukan 6 digit PIN lama",
+//         icon: "i-material-symbols-security-rounded",
+//       },
+//       {
+//         id: "new-pin",
+//         label: "PIN Baru",
+//         type: "password",
+//         placeholder: "Buat 6 digit PIN baru",
+//         icon: "i-material-symbols-security-rounded",
+//       },
+//       {
+//         id: "confirm-pin",
+//         label: "Konfirmasi PIN",
+//         type: "password",
+//         placeholder: "Konfirmasi 6 digit PIN baru",
+//         icon: "i-material-symbols-security-rounded",
+//       },
+//     ],
+//   },
+//   {
+//     id: "withdrawal",
+//     title: "Penarikan Dana",
+//     fields: [
+//       {
+//         id: "bank",
+//         label: "Pilih Bank",
+//         type: "select",
+//         placeholder: "Pilih bank tujuan penarikan",
+//         icon: "i-material-symbols-account-balance-rounded",
+//       },
+//       {
+//         id: "account-name",
+//         label: "Nama di Rekening",
+//         type: "text",
+//         placeholder: "Masukan nama pemilik rekening",
+//         icon: "i-material-symbols-person",
+//       },
+//       {
+//         id: "account-number",
+//         label: "No. Rekening",
+//         type: "text",
+//         placeholder: "Masukan No. Rekening",
+//         icon: "i-material-symbols-account-balance-wallet",
+//       },
+//     ],
+//   },
+// ];
+
+// export const accountSettings = [
+//   {
+//     id: "nama",
+//     type: "text",
+//     label: "NAMA",
+//     placeholder: "Masukan Nama",
+//     icon: "i-material-symbols-person-rounded",
+//   },
+//   {
+//     id: "aemail",
+//     type: "text",
+//     label: "EMAIL",
+//     placeholder: "Masukan No. Rekening",
+//     icon: "i-material-symbols-mail-rounded",
+//   },
+// ];
+
+export const accountSettings = [
+  {
+    sectionTitle: "Informasi Personal",
+    inputs: [
+      {
+        id: "nama",
+        type: "text",
+        label: "Nama",
+        placeholder: "Masukan Nama",
+        icon: "i-material-symbols-person-rounded",
+      },
+      {
+        id: "email",
+        type: "email",
+        label: "Email",
+        placeholder: "Masukan Email",
+        icon: "i-material-symbols-mail-rounded",
+      },
+    ],
+  },
+  {
+    sectionTitle: "Keamanan PIN",
+    inputs: [
+      {
+        id: "oldPin",
+        type: "password",
+        label: "PIN Lama",
+        placeholder: "Masukan 6 digit PIN lama",
+        icon: "i-material-symbols-lock-rounded",
+      },
+      {
+        id: "newPin",
+        type: "password",
+        label: "PIN Baru",
+        placeholder: "Buat 6 digit PIN baru",
+        icon: "i-material-symbols-lock-rounded",
+      },
+      {
+        id: "confirmPin",
+        type: "password",
+        label: "Konfirmasi PIN",
+        placeholder: "Konfirmasi 6 digit PIN baru",
+        icon: "i-material-symbols-lock-rounded",
+      },
+    ],
+  },
+  {
+    sectionTitle: "Penarikan Dana",
+    inputs: [
+      {
+        id: "bank",
+        type: "text",
+        label: "Pilih Bank",
+        placeholder: "Pilih bank tujuan",
+        icon: "i-material-symbols-account-balance-rounded",
+        options: ["Bank BRI", "Bank BCA", "Bank Jago"],
+      },
+      {
+        id: "accountName",
+        type: "text",
+        label: "Nama di Rekening",
+        placeholder: "Masukan nama pemilik rekening",
+        icon: "i-material-symbols-person",
+      },
+      {
+        id: "accountNumber",
+        type: "text",
+        label: "No. Rekening",
+        placeholder: "Masukan No. Rekening",
+        icon: "i-material-symbols-account-balance-wallet",
+      },
+    ],
   },
 ];

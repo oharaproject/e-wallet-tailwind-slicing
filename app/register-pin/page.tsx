@@ -40,7 +40,7 @@ export default function RegisterPin() {
           <CustomInput
             id="password"
             type="password"
-            label=""
+            label="Masukan Pasword"
             placeholder="6 Digit PIN"
             leftIcon="i-material-symbols-security-rounded"
             value={name}

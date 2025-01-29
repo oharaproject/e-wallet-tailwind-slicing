@@ -13,7 +13,15 @@ export interface CustomButtonProps {
 
 export interface CustomInputProps {
   id: string;
-  type: "text" | "email" | "password" | "number" | "search" | "tel" | "url";
+  type:
+    | string
+    | "text"
+    | "email"
+    | "password"
+    | "number"
+    | "search"
+    | "tel"
+    | "url";
   label: string;
   placeholder: string;
   hint?: string;
@@ -42,4 +50,9 @@ export interface ListItemProps {
 
 export interface AppbarProps {
   title: string;
+}
+
+export interface CustomSelectProps {
+  options: string[];
+  id: string;
 }

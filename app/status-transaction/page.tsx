@@ -31,7 +31,7 @@ export default function StatusTransaction() {
       : amount;
 
   return (
-    <div className="status-transaction-container relative">
+    <div className="transaction-container relative">
       <Appbar title="Status Transaksi" />
 
       <div className={`${backgroundColor} relative h-[260px]`}></div>

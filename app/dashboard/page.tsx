@@ -13,7 +13,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="dashboard-container">
+    <div className="transaction-container">
       <div className="flex">
         <Link href="#" className="user-link">
           <Image

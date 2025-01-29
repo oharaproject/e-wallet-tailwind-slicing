@@ -16,10 +16,10 @@ export default function TransactionHistory() {
   );
 
   return (
-    <div className="container md:max-w-md mx-auto min-h-screen bg-green-50 pb-[80px] flex flex-col gap-2 p-4">
+    <div className="transaction-container">
       <Appbar title="Riwayat Transaksi" />
 
-      <div className="rounder-[20px] bg-white shadow-md mt-20 overflow-hidden rounded-2xl px-2.5">
+      <div className="transaction-history">
         <div className="">
           <CustomInput
             id="search-transaction"
@@ -49,14 +49,12 @@ export default function TransactionHistory() {
               </div>
             ))
           ) : (
-            <p className="text-center text-gray-500 text-sm italic mt-4">
-              Tidak ada transaksi ditemukan
-            </p>
+            <p className="notransaction-text">Tidak ada transaksi ditemukan</p>
           )}
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 w-full py-3 shadow-md">
+      <div className="navbar-container">
         <Navbar />
       </div>
     </div>
