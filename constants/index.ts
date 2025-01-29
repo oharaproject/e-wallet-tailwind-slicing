@@ -62,6 +62,7 @@ export const userData = {
   avatar: "https://avatar.iran.liara.run/public/28",
   name: "John Doe",
   balance: 56094343,
+  accountNumber: 29352335290375,
 };
 
 export const transactionStatusData = {
@@ -118,3 +119,30 @@ export const statusConfig: Record<
       "Anda sudah melewati batas waktu transaksi yang diharapkan",
   },
 };
+
+export const accountMenuItems = [
+  {
+    id: 1,
+    icon: "i-material-symbols-manage-accounts-rounded",
+    title: "Pengaturan",
+    link: "/settings",
+  },
+  {
+    id: 2,
+    icon: "i-material-symbols-help-rounded",
+    title: "Pusat Bantuan",
+    link: "/help-center",
+  },
+  {
+    id: 3,
+    icon: "i-material-symbols-book-rounded",
+    title: "Syarat & Ketentuan",
+    link: "/terms-and-conditions",
+  },
+  {
+    id: 4,
+    icon: "i-material-symbols-info-rounded",
+    title: "Tentang KUSAKU",
+    link: "/about",
+  },
+];
