@@ -8,6 +8,7 @@ export interface CustomButtonProps {
   containerStyles: string;
   isDisabled?: boolean;
   handleClick?: () => void;
+  onClick?: () => void;
 }
 
 export interface CustomInputProps {
@@ -34,8 +35,8 @@ export interface CardListProps {
 export interface ListItemProps {
   iconClass: string;
   title: string;
-  description: string;
-  rightText: number | string;
+  description?: string;
+  rightText?: number | string;
   href: string;
 }
 

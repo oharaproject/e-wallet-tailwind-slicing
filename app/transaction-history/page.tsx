@@ -34,7 +34,7 @@ export default function TransactionHistory() {
 
         <div className="flex flex-col mt-4">
           {filteredTransactions.length > 0 ? (
-            filteredTransactions.map((item) => (
+            filteredTransactions.map((item, index) => (
               <div key={item.id}>
                 <ListItem
                   iconClass={item.iconClass}
@@ -43,7 +43,9 @@ export default function TransactionHistory() {
                   rightText={item.rightText}
                   href={item.href}
                 />
-                <div className="divider"></div>
+                {index !== filteredTransactions.length - 1 && (
+                  <div className="divider"></div>
+                )}
               </div>
             ))
           ) : (

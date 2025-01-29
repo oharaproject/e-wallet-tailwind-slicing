@@ -1,16 +1,19 @@
+"use client";
 import React from "react";
 import { Appbar, CustomButton, ListItem } from "@/components";
 import Image from "next/image";
 import { accountMenuItems, userData } from "@/constants";
+import { useRouter } from "next/navigation";
 
 export default function Account() {
+  const router = useRouter();
   return (
-    <div className="container md:max-w-md mx-auto min-h-screen bg-green-50 pb-[80px] flex flex-col gap-2">
+    <div className="container md:max-w-md mx-auto min-h-screen bg-green-50 pb-[80px] flex flex-col gap-2 relative">
       <Appbar title="Akun" />
 
-      <div className="bg-brands-light-green relative h-[260px]"></div>
+      <div className="bg-brands-light-green relative h-[260px] w-full"></div>
 
-      <div className="absolute mt-[92px] flex flex-col w-full gap-6 p-4">
+      <div className="absolute mt-[92px] flex flex-col w-full gap-6 p-4 flex-w">
         <div className="flex justify-between">
           <div className="flex items-center gap-3">
             <Image
@@ -32,20 +35,22 @@ export default function Account() {
             title="Tarik Saldo"
             leftIcon="i-material-symbols-account-balance-wallet"
             onClick={() => router.push("/withdraw")}
-            containerStyles="px-20 font-semibold "
+            containerStyles="flex-grow max-w-[200px] font-semibold "
           />
         </div>
         <span className="px-20"></span>
 
         <div className="rounded-[20px] bg-white p-2.5 shadow-md">
-          {accountMenuItems.map((item) => (
+          {accountMenuItems.map((item, index) => (
             <div key={item.id}>
               <ListItem
                 iconClass={item.icon}
                 title={item.title}
                 href={item.link}
               />
-              <div className="divider"></div>
+              {index !== accountMenuItems.length - 1 && (
+                <div className="divider"></div>
+              )}
             </div>
           ))}
         </div>
@@ -60,8 +65,6 @@ export default function Account() {
           onClick={() => alert("Logout")}
         />
       </div>
-
-      <span className=""></span>
     </div>
   );
 }

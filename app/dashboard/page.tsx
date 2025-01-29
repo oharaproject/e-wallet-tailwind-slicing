@@ -70,7 +70,7 @@ export default function Dashboard() {
       </div>
 
       <CardList title="Riwayat Transaksi" linkText="Lihat Lainnya" linkHref="#">
-        {transactionData.map((item) => (
+        {transactionData.map((item, index) => (
           <div key={item.id}>
             <ListItem
               iconClass={item.iconClass}
@@ -79,7 +79,9 @@ export default function Dashboard() {
               rightText={item.rightText}
               href={item.href}
             />
-            <div className="divider"></div>
+            {index !== transactionData.length - 1 && (
+              <div className="divider"></div>
+            )}
           </div>
         ))}
       </CardList>
