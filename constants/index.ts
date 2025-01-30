@@ -155,100 +155,6 @@ export const accountMenuItems = [
   },
 ];
 
-// export const accountSettingsSections = [
-//   {
-//     id: "personal-info",
-//     title: "Informasi Personal",
-//     fields: [
-//       {
-//         id: "name",
-//         label: "Nama",
-//         type: "text",
-//         placeholder: "Masukan Nama",
-//         icon: "i-material-symbols-person-rounded",
-//       },
-//       {
-//         id: "email",
-//         label: "Email",
-//         type: "text",
-//         placeholder: "Masukan Email",
-//         icon: "i-material-symbols-mail-rounded",
-//       },
-//     ],
-//   },
-//   {
-//     id: "security-pin",
-//     title: "Keamanan PIN",
-//     fields: [
-//       {
-//         id: "old-pin",
-//         label: "PIN Lama",
-//         type: "password",
-//         placeholder: "Masukan 6 digit PIN lama",
-//         icon: "i-material-symbols-security-rounded",
-//       },
-//       {
-//         id: "new-pin",
-//         label: "PIN Baru",
-//         type: "password",
-//         placeholder: "Buat 6 digit PIN baru",
-//         icon: "i-material-symbols-security-rounded",
-//       },
-//       {
-//         id: "confirm-pin",
-//         label: "Konfirmasi PIN",
-//         type: "password",
-//         placeholder: "Konfirmasi 6 digit PIN baru",
-//         icon: "i-material-symbols-security-rounded",
-//       },
-//     ],
-//   },
-//   {
-//     id: "withdrawal",
-//     title: "Penarikan Dana",
-//     fields: [
-//       {
-//         id: "bank",
-//         label: "Pilih Bank",
-//         type: "select",
-//         placeholder: "Pilih bank tujuan penarikan",
-//         icon: "i-material-symbols-account-balance-rounded",
-//       },
-//       {
-//         id: "account-name",
-//         label: "Nama di Rekening",
-//         type: "text",
-//         placeholder: "Masukan nama pemilik rekening",
-//         icon: "i-material-symbols-person",
-//       },
-//       {
-//         id: "account-number",
-//         label: "No. Rekening",
-//         type: "text",
-//         placeholder: "Masukan No. Rekening",
-//         icon: "i-material-symbols-account-balance-wallet",
-//       },
-//     ],
-//   },
-// ];
-
-// export const accountSettings = [
-//   {
-//     id: "nama",
-//     type: "text",
-//     label: "NAMA",
-//     placeholder: "Masukan Nama",
-//     icon: "i-material-symbols-person-rounded",
-//   },
-//   {
-//     id: "aemail",
-//     type: "text",
-//     label: "EMAIL",
-//     placeholder: "Masukan No. Rekening",
-//     icon: "i-material-symbols-mail-rounded",
-//   },
-// ];
-
 export const accountSettings = [
   {
     sectionTitle: "Informasi Personal",
@@ -259,6 +165,7 @@ export const accountSettings = [
         label: "Nama",
         placeholder: "Masukan Nama",
         icon: "i-material-symbols-person-rounded",
+        componentType: "input",
       },
       {
         id: "email",
@@ -266,6 +173,7 @@ export const accountSettings = [
         label: "Email",
         placeholder: "Masukan Email",
         icon: "i-material-symbols-mail-rounded",
+        componentType: "input",
       },
     ],
   },
@@ -277,21 +185,24 @@ export const accountSettings = [
         type: "password",
         label: "PIN Lama",
         placeholder: "Masukan 6 digit PIN lama",
-        icon: "i-material-symbols-lock-rounded",
+        icon: "i-material-symbols-security-rounded",
+        componentType: "input",
       },
       {
         id: "newPin",
         type: "password",
         label: "PIN Baru",
         placeholder: "Buat 6 digit PIN baru",
-        icon: "i-material-symbols-lock-rounded",
+        icon: "i-material-symbols-security-rounded",
+        componentType: "input",
       },
       {
         id: "confirmPin",
         type: "password",
         label: "Konfirmasi PIN",
         placeholder: "Konfirmasi 6 digit PIN baru",
-        icon: "i-material-symbols-lock-rounded",
+        icon: "i-material-symbols-security-rounded",
+        componentType: "input",
       },
     ],
   },
@@ -304,6 +215,7 @@ export const accountSettings = [
         label: "Pilih Bank",
         placeholder: "Pilih bank tujuan",
         icon: "i-material-symbols-account-balance-rounded",
+        componentType: "select",
         options: ["Bank BRI", "Bank BCA", "Bank Jago"],
       },
       {
@@ -311,7 +223,8 @@ export const accountSettings = [
         type: "text",
         label: "Nama di Rekening",
         placeholder: "Masukan nama pemilik rekening",
-        icon: "i-material-symbols-person",
+        icon: "i-material-symbols-person-rounded",
+        componentType: "input",
       },
       {
         id: "accountNumber",
@@ -319,6 +232,7 @@ export const accountSettings = [
         label: "No. Rekening",
         placeholder: "Masukan No. Rekening",
         icon: "i-material-symbols-account-balance-wallet",
+        componentType: "input",
       },
     ],
   },

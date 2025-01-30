@@ -26,11 +26,22 @@ export interface CustomInputProps {
   placeholder: string;
   hint?: string;
   value: string;
+  options?: string;
   isInvalid?: boolean;
   leftIcon?: string;
   rightIcon?: string;
   disabled?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface CustomSelectProps {
+  id: string;
+  label: string;
+  placeholder: string;
+  value: string;
+  options: string[];
+  leftIcon?: string;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export interface CardListProps {
