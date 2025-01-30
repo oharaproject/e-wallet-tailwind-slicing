@@ -1,4 +1,5 @@
 export interface CustomButtonProps {
+  type?: "button" | "submit" | "reset";
   variant: "primary" | "secondary" | "outline";
   size: "lg" | "sm";
   title: string;

@@ -2,6 +2,7 @@ import React from "react";
 import { CustomButtonProps } from "@/types";
 
 const CustomButton = ({
+  type = "button",
   variant,
   size,
   title,
@@ -15,7 +16,7 @@ const CustomButton = ({
   const iconSizeClass = iconSize ? `text-icon-${iconSize}` : "text-icon-md";
   return (
     <button
-      type="button"
+      type={type}
       disabled={isDisabled}
       className={`custom-btn btn-${variant} btn-${size} ${containerStyles}`}
       onClick={handleClick}
