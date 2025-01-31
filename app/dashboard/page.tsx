@@ -1,15 +1,43 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { transactionData, userData } from "@/constants";
 import Link from "next/link";
-import { CustomButton, CardList, ListItem, Navbar } from "@/components";
+import {
+  CustomButton,
+  CardList,
+  ListItem,
+  Navbar,
+  CustomModal,
+} from "@/components";
 
 export default function Dashboard() {
   const [isVisible, setIsVisible] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [topupAmount, setTopupAmount] = useState<string>("");
+  const [balance, setBalance] = useState(userData.balance);
+  const [isInvalid, setIsInvalid] = useState(false);
+
+  useEffect(() => {
+    console.log("Modal state changed:", isModalOpen);
+  }, [isModalOpen]);
 
   const handleVisibilityToggle = () => {
     setIsVisible(!isVisible);
+  };
+
+  const handleTopup = () => {
+    const amount = parseInt(topupAmount.replace(/^0+/, ""), 10);
+
+    if (isNaN(amount) || amount <= 10000) {
+      alert("Minimal top-up adalah Rp 10.000");
+      setIsInvalid(true);
+      return;
+    }
+
+    setBalance((prev) => prev + amount);
+    setIsModalOpen(false);
+    setTopupAmount("");
   };
 
   return (
@@ -32,9 +60,7 @@ export default function Dashboard() {
           <h2 className="text-2xl font-medium">
             <span>
               {isVisible
-                ? `Rp ${new Intl.NumberFormat("id-ID").format(
-                    userData.balance
-                  )}`
+                ? `Rp ${new Intl.NumberFormat("id-ID").format(balance)}`
                 : "•••••••••"}
             </span>
           </h2>
@@ -58,6 +84,10 @@ export default function Dashboard() {
           title="Top Up"
           leftIcon="i-material-symbols-download-rounded"
           containerStyles="w-full items-center"
+          onClick={() => {
+            console.log("Opening Topup Modal...");
+            setIsModalOpen(true);
+          }}
         />
         <CustomButton
           variant="primary"
@@ -89,6 +119,17 @@ export default function Dashboard() {
       <div className="navbar-container">
         <Navbar />
       </div>
+
+      {isModalOpen && (
+        <CustomModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          topupAmount={topupAmount}
+          setTopupAmount={setTopupAmount}
+          onTopup={handleTopup}
+          isInvalid={isInvalid}
+        />
+      )}
     </div>
   );
 }

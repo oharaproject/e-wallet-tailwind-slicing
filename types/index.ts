@@ -26,7 +26,7 @@ export interface CustomInputProps {
   label: string;
   placeholder: string;
   hint?: string;
-  value: string;
+  value: string | number;
   options?: string;
   isInvalid?: boolean;
   leftIcon?: string;
@@ -67,4 +67,13 @@ export interface AppbarProps {
 export interface CustomSelectProps {
   options: string[];
   id: string;
+}
+
+export interface CustomModalProps {
+  isOpen: boolean;
+  isInvalid: boolean;
+  onClose: () => void;
+  topupAmount: string;
+  setTopupAmount: (value: string) => void;
+  onTopup: () => void;
 }

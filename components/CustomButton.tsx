@@ -12,6 +12,7 @@ const CustomButton = ({
   containerStyles,
   isDisabled,
   handleClick,
+  onClick,
 }: CustomButtonProps) => {
   const iconSizeClass = iconSize ? `text-icon-${iconSize}` : "text-icon-md";
   return (
@@ -19,7 +20,10 @@ const CustomButton = ({
       type={type}
       disabled={isDisabled}
       className={`custom-btn btn-${variant} btn-${size} ${containerStyles}`}
-      onClick={handleClick}
+      onClick={() => {
+        if (handleClick) handleClick();
+        if (onClick) onClick();
+      }}
     >
       {leftIcon && <span className={`${iconSizeClass} ${leftIcon}`}></span>}
       <span>{title}</span>

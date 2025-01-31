@@ -63,6 +63,7 @@ export default function Home() {
             ))}
           </CardList>
         </div>
+
         <Footer />
       </div>
     </div>
