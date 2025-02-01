@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { transactionData, userData } from "@/constants";
+import { transactionData, userData, contactData } from "@/constants";
 import Link from "next/link";
 import {
   CustomButton,
@@ -12,15 +12,23 @@ import {
 } from "@/components";
 
 export default function Dashboard() {
+  // topup state
   const [isVisible, setIsVisible] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isTopupOpen, setIsTopupOpen] = useState(false);
   const [topupAmount, setTopupAmount] = useState<string>("");
   const [balance, setBalance] = useState(userData.balance);
   const [isInvalid, setIsInvalid] = useState(false);
 
+  // transfer state
+  const [isTransferOpen, setIsTransferOpen] = useState<boolean>(false);
+  const [selectedContact, setSelectedContact] = useState<{
+    name: string;
+    account: string;
+  } | null>(null);
+
   useEffect(() => {
-    console.log("Modal state changed:", isModalOpen);
-  }, [isModalOpen]);
+    console.log("Modal state changed:", isTopupOpen, isTransferOpen);
+  }, [isTopupOpen, isTransferOpen]);
 
   const handleVisibilityToggle = () => {
     setIsVisible(!isVisible);
@@ -36,7 +44,7 @@ export default function Dashboard() {
     }
 
     setBalance((prev) => prev + amount);
-    setIsModalOpen(false);
+    setIsTopupOpen(false);
     setTopupAmount("");
   };
 
@@ -86,7 +94,8 @@ export default function Dashboard() {
           containerStyles="w-full items-center"
           onClick={() => {
             console.log("Opening Topup Modal...");
-            setIsModalOpen(true);
+            setIsTopupOpen(true);
+            setIsTransferOpen(false);
           }}
         />
         <CustomButton
@@ -96,6 +105,11 @@ export default function Dashboard() {
           title="Transfer"
           leftIcon="i-material-symbols-download-rounded"
           containerStyles="w-full items-center"
+          onClick={() => {
+            console.log("Opening Topup Modal...");
+            setIsTransferOpen(true);
+            setIsTopupOpen(false);
+          }}
         />
       </div>
 
@@ -120,14 +134,29 @@ export default function Dashboard() {
         <Navbar />
       </div>
 
-      {isModalOpen && (
+      {isTopupOpen && (
         <CustomModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+          isTopupOpen={isTopupOpen}
+          onClose={() => setIsTopupOpen(false)}
           topupAmount={topupAmount}
           setTopupAmount={setTopupAmount}
           onTopup={handleTopup}
           isInvalid={isInvalid}
+        />
+      )}
+
+      {isTransferOpen && (
+        <CustomModal
+          isTransferOpen={isTransferOpen}
+          setIsTransferOpen={setIsTransferOpen}
+          onClose={() => setIsTransferOpen(false)}
+          contactData={contactData || []}
+          selectedContact={selectedContact}
+          setSelectedContact={setSelectedContact}
+          isInvalid={isInvalid}
+          topupAmount=""
+          setTopupAmount={() => {}}
+          onTopup={() => {}}
         />
       )}
     </div>

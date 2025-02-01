@@ -58,6 +58,7 @@ export interface ListItemProps {
   description?: string;
   rightText?: number | string;
   href: string;
+  onClick?: () => void;
 }
 
 export interface AppbarProps {
@@ -70,10 +71,17 @@ export interface CustomSelectProps {
 }
 
 export interface CustomModalProps {
-  isOpen: boolean;
+  isTopupOpen?: boolean;
+  isTransferOpen?: boolean;
+  setIsTransferOpen?: (open: boolean) => void;
   isInvalid: boolean;
   onClose: () => void;
   topupAmount: string;
   setTopupAmount: (value: string) => void;
   onTopup: () => void;
+  contactData?: { name: string; account: string; icon: string }[];
+  selectedContact?: { name: string; account: string } | null;
+  setSelectedContact?: (
+    contact: { name: string; account: string } | null
+  ) => void;
 }
