@@ -9,6 +9,7 @@ import ListItem from "./ListItem";
 
 const CustomModal = ({
   isTopupOpen,
+  setIsTopupOpen,
   isTransferOpen,
   setIsTransferOpen,
   isInvalid,
@@ -26,15 +27,24 @@ const CustomModal = ({
   const [isSearchingContact, setIsSearchingContact] = useState(false);
 
   useEffect(() => {
-    console.log("Modal isOpen status:", isTopupOpen, isTransferOpen);
+    console.log(
+      "Checking modal state change: isTopupOpen:",
+      isTopupOpen,
+      "isTransferOpen:",
+      isTransferOpen
+    );
     if (isTopupOpen || isTransferOpen) {
-      console.log("Opening Modal...");
       modalRef.current?.showModal();
     } else {
-      console.log("Closing modal...");
       modalRef.current?.close();
     }
+    console.log("Modal state after update:", isTopupOpen, isTransferOpen);
   }, [isTopupOpen, isTransferOpen]);
+
+  if (!setSelectedContact) {
+    console.error("setSelectedContact is undefined");
+    return null;
+  }
 
   const filteredContact =
     contactData?.filter(
@@ -42,6 +52,21 @@ const CustomModal = ({
         contact.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         contact.account.toLowerCase().includes(searchTerm.toLowerCase())
     ) || [];
+
+  const handleCloseModal = () => {
+    if (setIsTopupOpen) {
+      setIsTopupOpen(false);
+      console.log("setIsTopupOpen set to false");
+    }
+
+    if (setIsTransferOpen) {
+      setIsTransferOpen(false);
+      console.log("setIsTransferOpen set to false");
+    }
+    if (modalRef.current) {
+      modalRef.current.close();
+    }
+  };
 
   return (
     <dialog
@@ -71,12 +96,12 @@ const CustomModal = ({
             title="Close"
             leftIcon="i-material-symbols-close-rounded"
             containerStyles="items-center "
-            onClick={onClose}
+            onClick={handleCloseModal}
           />
         </div>
         <div className="flex flex-col gap-8 rounded-t-[36px] bg-white p-6">
-          {/* modal topup */}
-          {isTopupOpen && (
+          {/* Modal topup */}
+          {isTopupOpen && !isSearchingContact && (
             <form
               action=""
               className="flex flex-col gap-8"
@@ -106,7 +131,8 @@ const CustomModal = ({
             </form>
           )}
 
-          {isSearchingContact ? (
+          {/* Bagian pencarian kontak */}
+          {isSearchingContact && (
             <div className="flex flex-col gap-y-1.5">
               <div className="mb-2">
                 <CustomInput
@@ -119,7 +145,6 @@ const CustomModal = ({
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
-
               <div className="flex flex-col">
                 {filteredContact.length > 0 ? (
                   filteredContact.map((item, index) => (
@@ -131,15 +156,15 @@ const CustomModal = ({
                         rightText=""
                         href=""
                         onClick={() => {
+                          console.log("Contact clicked:", item.name);
                           if (setSelectedContact) {
                             setSelectedContact({
                               name: item.name,
                               account: item.account,
                             });
-                            setIsSearchingContact(false);
-                            if (setIsTransferOpen) {
-                              setIsTransferOpen(true);
-                            }
+                            console.log("Selected contact updated:", item.name);
+                          } else {
+                            console.error("setSelectedContact is undefined");
                           }
                         }}
                       />
@@ -155,67 +180,67 @@ const CustomModal = ({
                 )}
               </div>
             </div>
-          ) : (
-            <>
-              {/* modal transfer */}
-              {isTransferOpen && (
-                <form
-                  action=""
-                  className="flex flex-col gap-8"
-                  onSubmit={(e) => e.preventDefault()}
-                >
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-4">
-                      <Image
-                        src="/logo-green.svg"
-                        alt="kusaku logo"
-                        width={57}
-                        height={37}
-                      />
-                      {selectedContact ? (
-                        <div className="flex items-center gap-2 text-xs font-medium">
-                          <span>{selectedContact.name}</span>
-                          <span className="i-material-symbols-circle text-[4px] text-gray-500"></span>
-                          <span>{selectedContact.account}</span>
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-2 text-xs font-medium">
-                          <span>Pilih Penerima</span>
-                        </div>
-                      )}
-                    </div>
-                    <a
-                      href="#"
-                      className="text-xs font-semibold text-brands-light-green hover:text-brands-light-green/70 focus:outline-none focus:ring-2 focus:ring-green-400"
-                      onClick={() => setIsSearchingContact(true)}
-                    >
-                      Cari Kontak
-                    </a>
-                  </div>
-                  <div className="relative">
-                    <CustomInput
-                      id="topup"
-                      type="text"
-                      label=""
-                      placeholder="Nominal Rupiah"
-                      leftIcon="i-material-symbols-account-balance-wallet"
-                      value={topupAmount}
-                      onChange={(e) => setTopupAmount(e.target.value)}
-                      isInvalid={isInvalid}
-                    />
-                  </div>
-                  <CustomButton
-                    variant="primary"
-                    size="lg"
-                    iconSize="md"
-                    title="Top Up"
-                    leftIcon="i-material-symbols-send-rounded"
-                    containerStyles="items-center w-full"
-                    onClick={onTopup}
+          )}
+
+          {/* Modal transfer */}
+          {isTransferOpen && !isSearchingContact && (
+            <form
+              action=""
+              className="flex flex-col gap-8"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-4">
+                  <Image
+                    src="/logo-green.svg"
+                    alt="kusaku logo"
+                    width={57}
+                    height={37}
                   />
-                </form>
-              )}
-            </>
+                  {selectedContact ? (
+                    <div className="flex items-center gap-2 text-xs font-medium">
+                      <span>{selectedContact.name}</span>
+                      <span className="i-material-symbols-circle text-[4px] text-gray-500"></span>
+                      <span>{selectedContact.account}</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 text-xs font-medium">
+                      <span className="text-xs font-semibold text-brands-light-green">
+                        Pilih Penerima
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <a
+                  href="#"
+                  className="text-xs font-semibold text-brands-light-green hover:text-brands-light-green/70 focus:outline-none focus:ring-2 focus:ring-green-400"
+                  onClick={() => setIsSearchingContact(true)}
+                >
+                  Cari Kontak
+                </a>
+              </div>
+              <div className="relative">
+                <CustomInput
+                  id="topup"
+                  type="text"
+                  label=""
+                  placeholder="Nominal Rupiah"
+                  leftIcon="i-material-symbols-account-balance-wallet"
+                  value={topupAmount}
+                  onChange={(e) => setTopupAmount(e.target.value)}
+                  isInvalid={isInvalid}
+                />
+              </div>
+              <CustomButton
+                variant="primary"
+                size="lg"
+                iconSize="md"
+                title="Top Up"
+                leftIcon="i-material-symbols-send-rounded"
+                containerStyles="items-center w-full"
+                onClick={onTopup}
+              />
+            </form>
           )}
         </div>
       </div>

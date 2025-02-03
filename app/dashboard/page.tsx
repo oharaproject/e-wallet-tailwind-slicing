@@ -106,7 +106,7 @@ export default function Dashboard() {
           leftIcon="i-material-symbols-download-rounded"
           containerStyles="w-full items-center"
           onClick={() => {
-            console.log("Opening Topup Modal...");
+            console.log("Opening Transfer Modal...");
             setIsTransferOpen(true);
             setIsTopupOpen(false);
           }}
@@ -137,6 +137,7 @@ export default function Dashboard() {
       {isTopupOpen && (
         <CustomModal
           isTopupOpen={isTopupOpen}
+          setIsTopupOpen={setIsTopupOpen}
           onClose={() => setIsTopupOpen(false)}
           topupAmount={topupAmount}
           setTopupAmount={setTopupAmount}

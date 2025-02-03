@@ -74,6 +74,7 @@ export interface CustomModalProps {
   isTopupOpen?: boolean;
   isTransferOpen?: boolean;
   setIsTransferOpen?: (open: boolean) => void;
+  setIsTopupOpen?: (open: boolean) => void;
   isInvalid: boolean;
   onClose: () => void;
   topupAmount: string;
