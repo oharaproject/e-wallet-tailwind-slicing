@@ -5,26 +5,25 @@ import CustomButton from "./CustomButton";
 import CustomInput from "./CustomInput";
 import { CustomModalProps } from "@/types";
 import Image from "next/image";
-import ListItem from "./ListItem";
 
 const CustomModal = ({
   isTopupOpen,
   setIsTopupOpen,
+  isOpen,
+  setIsOpen,
   isTransferOpen,
   setIsTransferOpen,
+  selectedContact,
   isInvalid,
   onClose,
   topupAmount,
   setTopupAmount,
   onTopup,
   contactData,
-  selectedContact,
-  setSelectedContact,
 }: CustomModalProps) => {
   const modalRef = useRef<HTMLDialogElement>(null);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [isSearchingContact, setIsSearchingContact] = useState(false);
 
   useEffect(() => {
     console.log(
@@ -41,10 +40,10 @@ const CustomModal = ({
     console.log("Modal state after update:", isTopupOpen, isTransferOpen);
   }, [isTopupOpen, isTransferOpen]);
 
-  if (!setSelectedContact) {
-    console.error("setSelectedContact is undefined");
-    return null;
-  }
+  // if (!setSelectedContact) {
+  //   console.error("setSelectedContact is undefined");
+  //   return null;
+  // }
 
   const filteredContact =
     contactData?.filter(
@@ -76,7 +75,7 @@ const CustomModal = ({
     >
       <div className="flex flex-col">
         <div className="flex justify-between px-6 pb-8">
-          {isSearchingContact ? (
+          {isOpen ? (
             <CustomButton
               variant="secondary"
               size="sm"
@@ -84,7 +83,7 @@ const CustomModal = ({
               title="Back"
               leftIcon="i-material-symbols-chevron-left-rounded"
               containerStyles="items-center"
-              onClick={() => setIsSearchingContact(false)}
+              onClick={handleCloseModal}
             />
           ) : (
             <div></div>
@@ -101,7 +100,7 @@ const CustomModal = ({
         </div>
         <div className="flex flex-col gap-8 rounded-t-[36px] bg-white p-6">
           {/* Modal topup */}
-          {isTopupOpen && !isSearchingContact && (
+          {isTopupOpen && (
             <form
               action=""
               className="flex flex-col gap-8"
@@ -132,7 +131,7 @@ const CustomModal = ({
           )}
 
           {/* Bagian pencarian kontak */}
-          {isSearchingContact && (
+          {/* {isSearchingContact && (
             <div className="flex flex-col gap-y-1.5">
               <div className="mb-2">
                 <CustomInput
@@ -180,10 +179,10 @@ const CustomModal = ({
                 )}
               </div>
             </div>
-          )}
+          )} */}
 
           {/* Modal transfer */}
-          {isTransferOpen && !isSearchingContact && (
+          {isTransferOpen && (
             <form
               action=""
               className="flex flex-col gap-8"
@@ -205,30 +204,27 @@ const CustomModal = ({
                     </div>
                   ) : (
                     <div className="flex items-center gap-2 text-xs font-medium">
-                      <span className="text-xs font-semibold text-brands-light-green">
-                        Pilih Penerima
-                      </span>
+                      <span className="text-xs font-semibold text-brands-light-green"></span>
                     </div>
                   )}
                 </div>
                 <a
                   href="#"
                   className="text-xs font-semibold text-brands-light-green hover:text-brands-light-green/70 focus:outline-none focus:ring-2 focus:ring-green-400"
-                  onClick={() => setIsSearchingContact(true)}
+                  onClick={() => setIsOpen(true)}
                 >
                   Cari Kontak
                 </a>
               </div>
               <div className="relative">
                 <CustomInput
-                  id="topup"
+                  id="search-contact"
                   type="text"
                   label=""
-                  placeholder="Nominal Rupiah"
-                  leftIcon="i-material-symbols-account-balance-wallet"
-                  value={topupAmount}
-                  onChange={(e) => setTopupAmount(e.target.value)}
-                  isInvalid={isInvalid}
+                  placeholder="Cari KUSAKU ID"
+                  leftIcon="i-material-symbols-search"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
               <CustomButton
@@ -238,7 +234,7 @@ const CustomModal = ({
                 title="Top Up"
                 leftIcon="i-material-symbols-send-rounded"
                 containerStyles="items-center w-full"
-                onClick={onTopup}
+                onClick={() => {}}
               />
             </form>
           )}

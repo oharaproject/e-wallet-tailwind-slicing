@@ -70,25 +70,53 @@ export interface CustomSelectProps {
   id: string;
 }
 
-export interface CustomModalProps {
-  isTopupOpen?: boolean;
-  isTransferOpen?: boolean;
-  setIsTransferOpen?: (open: boolean) => void;
-  setIsTopupOpen?: (open: boolean) => void;
-  isInvalid: boolean;
-  onClose: () => void;
-  topupAmount: string;
-  setTopupAmount: (value: string) => void;
-  onTopup: () => void;
-  contactData?: { name: string; account: string; icon: string }[];
-  selectedContact?: { name: string; account: string } | null;
-  setSelectedContact?: (
-    contact: { name: string; account: string } | null
-  ) => void;
-}
+// export interface CustomModalProps {
+//   // topup
+//   isTopupOpen?: boolean;
+//   setIsTopupOpen?: (open: boolean) => void;
+//   topupAmount: string;
+//   setTopupAmount: (value: string) => void;
+//   onTopup: () => void;
+
+//   // transfer
+//   isTransferOpen?: boolean;
+//   setIsTransferOpen?: (open: boolean) => void;
+//   contactData?: { name: string; account: string; icon: string }[];
+//   setIsOpen?: boolean;
+//   setSelectedContact?: (
+//     contact: { name: string; account: string } | null
+//   ) => void;
+
+//   onClose: () => void;
+//   selectedContact: contact | null;
+//   isInvalid: boolean;
+// }
 
 export interface SelectContactModalProps {
   isOpen: boolean; // State untuk menampilkan modal
   onClose: () => void; // Fungsi untuk menutup modal
   onSelectContact: (contact: { name: string; account: string }) => void; // Fungsi untuk memilih kontak
+}
+
+export interface CustomModalProps {
+  // topup
+  isTopupOpen?: boolean;
+  setIsTopupOpen?: (open: boolean) => void;
+  topupAmount: string;
+  setTopupAmount: (value: string) => void;
+  onTopup: () => void;
+
+  // transfer
+  isOpen?: boolean;
+  isTransferOpen?: boolean;
+  setIsTransferOpen?: (open: boolean) => void;
+  contactData?: { name: string; account: string; icon: string }[]; // Ensure that this matches the structure of contactData in SelectContactModal
+  setIsOpen?: boolean;
+  setSelectedContact?: (
+    contact: { name: string; account: string } | null
+  ) => void;
+
+  onClose: () => void;
+  selectedContact: { name: string; account: string } | null;
+  isInvalid: boolean;
 }

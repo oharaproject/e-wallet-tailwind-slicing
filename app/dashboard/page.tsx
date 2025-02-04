@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { transactionData, userData, contactData } from "@/constants";
+import { transactionData, userData } from "@/constants";
 import Link from "next/link";
 import {
   CustomButton,
@@ -9,6 +9,7 @@ import {
   ListItem,
   Navbar,
   CustomModal,
+  SelectContactModal,
 } from "@/components";
 
 export default function Dashboard() {
@@ -25,6 +26,7 @@ export default function Dashboard() {
     name: string;
     account: string;
   } | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     console.log("Modal state changed:", isTopupOpen, isTransferOpen);
@@ -46,6 +48,12 @@ export default function Dashboard() {
     setBalance((prev) => prev + amount);
     setIsTopupOpen(false);
     setTopupAmount("");
+  };
+
+  const handleSelectContact = (contact: { name: string; account: string }) => {
+    // Menyimpan kontak yang dipilih ke dalam state selectedContact
+    setSelectedContact(contact);
+    setIsOpen(false); // Menutup modal setelah memilih kontak
   };
 
   return (
@@ -146,18 +154,27 @@ export default function Dashboard() {
         />
       )}
 
+      {isOpen && (
+        <SelectContactModal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          onSelectContact={handleSelectContact}
+        />
+      )}
+
       {isTransferOpen && (
         <CustomModal
           isTransferOpen={isTransferOpen}
           setIsTransferOpen={setIsTransferOpen}
           onClose={() => setIsTransferOpen(false)}
-          contactData={contactData || []}
           selectedContact={selectedContact}
           setSelectedContact={setSelectedContact}
           isInvalid={isInvalid}
           topupAmount=""
           setTopupAmount={() => {}}
           onTopup={() => {}}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
         />
       )}
     </div>
