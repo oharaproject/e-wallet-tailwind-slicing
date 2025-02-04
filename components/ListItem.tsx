@@ -7,6 +7,7 @@ const ListItem = ({
   description,
   rightText,
   href,
+  onClick,
 }: ListItemProps) => {
   const formattedRightText =
     typeof rightText === "number"
@@ -21,7 +22,7 @@ const ListItem = ({
       : "text-red-500";
 
   return (
-    <a href={href} className="list-item">
+    <a href={href} className="list-item" onClick={onClick}>
       {/* Left Section */}
       <div className="list-item-left">
         {iconClass && <span className={`list-item-icon ${iconClass}`}></span>}

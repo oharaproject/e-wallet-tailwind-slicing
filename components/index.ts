@@ -7,6 +7,7 @@ import CustomInput from "./CustomInput";
 import ListItem from "./ListItem";
 import CustomSelect from "./CustomSelect";
 import CustomModal from "./CustomModal";
+import SelectContactModal from "./SelectContactModal";
 
 export {
   Navbar,
@@ -18,4 +19,5 @@ export {
   ListItem,
   CustomSelect,
   CustomModal,
+  SelectContactModal,
 };

@@ -240,28 +240,33 @@ export const accountSettings = [
 
 export const contactData = [
   {
+    id: 1,
     name: "Jonathon Bayer",
     account: "257475257",
-    icon: "i-material-symbols-person-outline-rounded",
+    iconClass: "i-material-symbols-person-outline-rounded",
   },
   {
+    id: 2,
     name: "Carrie Hill",
     account: "289757327",
-    icon: "i-material-symbols-person-outline-rounded",
+    iconClass: "i-material-symbols-person-outline-rounded",
   },
   {
+    id: 3,
     name: "Caleb Wolff",
     account: "259747527",
-    icon: "i-material-symbols-person-outline-rounded",
+    iconClass: "i-material-symbols-person-outline-rounded",
   },
   {
+    id: 4,
     name: "Lynda Boer",
     account: "289747537",
-    icon: "i-material-symbols-person-outline-rounded",
+    iconClass: "i-material-symbols-person-outline-rounded",
   },
   {
+    id: 5,
     name: "Jose Spinka",
     account: "289757547",
-    icon: "i-material-symbols-person-outline-rounded",
+    iconClass: "i-material-symbols-person-outline-rounded",
   },
 ];

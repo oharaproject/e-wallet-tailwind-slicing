@@ -86,3 +86,9 @@ export interface CustomModalProps {
     contact: { name: string; account: string } | null
   ) => void;
 }
+
+export interface SelectContactModalProps {
+  isOpen: boolean; // State untuk menampilkan modal
+  onClose: () => void; // Fungsi untuk menutup modal
+  onSelectContact: (contact: { name: string; account: string }) => void; // Fungsi untuk memilih kontak
+}
