@@ -70,32 +70,10 @@ export interface CustomSelectProps {
   id: string;
 }
 
-// export interface CustomModalProps {
-//   // topup
-//   isTopupOpen?: boolean;
-//   setIsTopupOpen?: (open: boolean) => void;
-//   topupAmount: string;
-//   setTopupAmount: (value: string) => void;
-//   onTopup: () => void;
-
-//   // transfer
-//   isTransferOpen?: boolean;
-//   setIsTransferOpen?: (open: boolean) => void;
-//   contactData?: { name: string; account: string; icon: string }[];
-//   setIsOpen?: boolean;
-//   setSelectedContact?: (
-//     contact: { name: string; account: string } | null
-//   ) => void;
-
-//   onClose: () => void;
-//   selectedContact: contact | null;
-//   isInvalid: boolean;
-// }
-
 export interface SelectContactModalProps {
-  isOpen: boolean; // State untuk menampilkan modal
-  onClose: () => void; // Fungsi untuk menutup modal
-  onSelectContact: (contact: { name: string; account: string }) => void; // Fungsi untuk memilih kontak
+  isOpen: boolean;
+  onClose: () => void;
+  onSelectContact: (contact: { name: string; account: string }) => void;
 }
 
 export interface CustomModalProps {
@@ -108,10 +86,11 @@ export interface CustomModalProps {
 
   // transfer
   isOpen?: boolean;
+  setIsOpen: (value: boolean) => void;
   isTransferOpen?: boolean;
   setIsTransferOpen?: (open: boolean) => void;
-  contactData?: { name: string; account: string; icon: string }[]; // Ensure that this matches the structure of contactData in SelectContactModal
-  setIsOpen?: boolean;
+  contactData?: { name: string; account: string; icon: string }[];
+
   setSelectedContact?: (
     contact: { name: string; account: string } | null
   ) => void;

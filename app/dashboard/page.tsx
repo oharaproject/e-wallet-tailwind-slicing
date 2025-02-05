@@ -10,6 +10,7 @@ import {
   Navbar,
   CustomModal,
   SelectContactModal,
+  SearchContactModal,
 } from "@/components";
 
 export default function Dashboard() {
@@ -21,6 +22,7 @@ export default function Dashboard() {
   const [isInvalid, setIsInvalid] = useState(false);
 
   // transfer state
+  const [isTransferSearchOpen, setIsTransferSearchOpen] = useState(false);
   const [isTransferOpen, setIsTransferOpen] = useState<boolean>(false);
   const [selectedContact, setSelectedContact] = useState<{
     name: string;
@@ -50,10 +52,17 @@ export default function Dashboard() {
     setTopupAmount("");
   };
 
+  const handleTransferClick = () => {
+    setIsTransferSearchOpen(true);
+    setIsTransferOpen(false);
+    setIsOpen(false);
+  };
+
   const handleSelectContact = (contact: { name: string; account: string }) => {
-    // Menyimpan kontak yang dipilih ke dalam state selectedContact
     setSelectedContact(contact);
-    setIsOpen(false); // Menutup modal setelah memilih kontak
+    setIsOpen(false);
+    setIsTransferSearchOpen(false);
+    setIsTransferOpen(true);
   };
 
   return (
@@ -103,6 +112,7 @@ export default function Dashboard() {
           onClick={() => {
             console.log("Opening Topup Modal...");
             setIsTopupOpen(true);
+            setIsTransferSearchOpen(false);
             setIsTransferOpen(false);
           }}
         />
@@ -113,11 +123,7 @@ export default function Dashboard() {
           title="Transfer"
           leftIcon="i-material-symbols-download-rounded"
           containerStyles="w-full items-center"
-          onClick={() => {
-            console.log("Opening Transfer Modal...");
-            setIsTransferOpen(true);
-            setIsTopupOpen(false);
-          }}
+          onClick={handleTransferClick}
         />
       </div>
 
@@ -154,6 +160,15 @@ export default function Dashboard() {
         />
       )}
 
+      {isTransferSearchOpen && (
+        <SearchContactModal
+          isOpen={isTransferSearchOpen}
+          onClose={() => setIsTransferSearchOpen(false)}
+          onSelectContact={handleSelectContact}
+          setIsOpen={setIsOpen}
+        />
+      )}
+
       {isOpen && (
         <SelectContactModal
           isOpen={isOpen}
@@ -162,7 +177,7 @@ export default function Dashboard() {
         />
       )}
 
-      {isTransferOpen && (
+      {isTransferOpen && selectedContact && (
         <CustomModal
           isTransferOpen={isTransferOpen}
           setIsTransferOpen={setIsTransferOpen}

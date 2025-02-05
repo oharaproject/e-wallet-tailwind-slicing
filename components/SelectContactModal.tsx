@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { CustomButton, ListItem, CustomInput } from "@/components";
-import { contactData } from "@/constants"; // Assuming contact data
+import { contactData } from "@/constants";
 import { SelectContactModalProps } from "@/types";
 
 const SelectContactModal = ({
@@ -21,14 +21,13 @@ const SelectContactModal = ({
 
   useEffect(() => {
     if (isOpen) {
-      modalRef.current?.showModal(); // Open modal when isOpen is true
+      modalRef.current?.showModal();
     } else {
-      modalRef.current?.close(); // Close modal when isOpen is false
+      modalRef.current?.close();
     }
   }, [isOpen]);
 
   const handleSelectContact = (contact: { name: string; account: string }) => {
-    // Memanggil fungsi onSelectContact yang diterima dari props untuk mengirim kontak yang dipilih
     onSelectContact(contact);
   };
 
