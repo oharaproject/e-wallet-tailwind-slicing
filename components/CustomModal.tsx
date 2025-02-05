@@ -23,6 +23,8 @@ const CustomModal = ({
   const modalRef = useRef<HTMLDialogElement>(null);
   const transferModalRef = useRef<HTMLDialogElement>(null);
 
+  const [searchTerm, setsearchTerm] = useState("");
+
   useEffect(() => {
     if (isTopupOpen && modalRef.current) {
       modalRef.current.showModal();

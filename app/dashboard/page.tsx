@@ -63,6 +63,7 @@ export default function Dashboard() {
     setIsOpen(false);
     setIsTransferSearchOpen(false);
     setIsTransferOpen(true);
+    console.log("isTransferOpen after select contact:", isTransferOpen);
   };
 
   return (
