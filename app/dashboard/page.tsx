@@ -157,7 +157,6 @@ export default function Dashboard() {
           topupAmount={topupAmount}
           setTopupAmount={setTopupAmount}
           onTopup={handleTopup}
-          isInvalid={isInvalid}
         />
       )}
 
@@ -174,6 +173,10 @@ export default function Dashboard() {
         <SelectContactModal
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
+          onCloseSearch={() => {
+            setIsTransferSearchOpen(false);
+            setIsOpen(false);
+          }}
           onSelectContact={handleSelectContact}
         />
       )}

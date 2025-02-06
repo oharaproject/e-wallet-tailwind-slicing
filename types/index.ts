@@ -1,3 +1,5 @@
+import { MouseEventHandler } from "react";
+
 export interface CustomButtonProps {
   type?: "button" | "submit" | "reset";
   variant: "primary" | "secondary" | "outline";
@@ -58,7 +60,7 @@ export interface ListItemProps {
   description?: string;
   rightText?: number | string;
   href: string;
-  onClick?: () => void;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 export interface AppbarProps {
@@ -73,6 +75,7 @@ export interface CustomSelectProps {
 export interface SelectContactModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onCloseSearch: () => void;
   onSelectContact: (contact: { name: string; account: string }) => void;
 }
 

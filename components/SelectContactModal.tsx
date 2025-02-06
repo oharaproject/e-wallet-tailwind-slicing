@@ -7,6 +7,7 @@ import { SelectContactModalProps } from "@/types";
 const SelectContactModal = ({
   isOpen,
   onClose,
+  onCloseSearch,
   onSelectContact,
 }: SelectContactModalProps) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -27,7 +28,11 @@ const SelectContactModal = ({
     }
   }, [isOpen]);
 
-  const handleSelectContact = (contact: { name: string; account: string }) => {
+  const handleSelectContact = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    contact: { name: string; account: string }
+  ) => {
+    event.preventDefault();
     onSelectContact(contact);
   };
 
@@ -55,7 +60,7 @@ const SelectContactModal = ({
             title="Close"
             leftIcon="i-material-symbols-close-rounded"
             containerStyles="items-center"
-            onClick={onClose}
+            onClick={onCloseSearch}
           />
         </div>
 
@@ -82,7 +87,7 @@ const SelectContactModal = ({
                       description={contact.account}
                       rightText="Pilih"
                       href=""
-                      onClick={() => handleSelectContact(contact)}
+                      onClick={(event) => handleSelectContact(event, contact)}
                     />
                     {index !== filteredContact.length - 1 && (
                       <div className="divider"></div>

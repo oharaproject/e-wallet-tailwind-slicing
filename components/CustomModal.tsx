@@ -61,6 +61,10 @@ const CustomModal = ({
     }
   };
 
+  const handleOpenSearchContact = () => {
+    setIsOpen(true);
+  };
+
   return (
     <>
       {/* topup modal */}
@@ -137,7 +141,7 @@ const CustomModal = ({
       >
         <div className="flex flex-col">
           <div className="flex justify-between px-6 pb-8">
-            {isOpen ? (
+            {!isOpen ? (
               <CustomButton
                 variant="secondary"
                 size="sm"
@@ -145,7 +149,7 @@ const CustomModal = ({
                 title="Back"
                 leftIcon="i-material-symbols-chevron-left-rounded"
                 containerStyles="items-center"
-                onClick={handleCloseModal}
+                onClick={handleOpenSearchContact}
               />
             ) : (
               <div></div>
