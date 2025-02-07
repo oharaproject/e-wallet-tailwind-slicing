@@ -101,4 +101,10 @@ export interface CustomModalProps {
   onClose: () => void;
   selectedContact: { name: string; account: string } | null;
   isInvalid: boolean;
+
+  // transfer amount
+  transferAmount: string;
+  setTransferAmount: (value: string) => void;
+
+  onTransfer: () => void;
 }

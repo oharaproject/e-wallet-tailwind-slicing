@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { useEffect, useRef } from "react";
 import CustomButton from "./CustomButton";
 import CustomInput from "./CustomInput";
@@ -19,11 +19,12 @@ const CustomModal = ({
   topupAmount,
   setTopupAmount,
   onTopup,
+  transferAmount,
+  setTransferAmount,
+  onTransfer,
 }: CustomModalProps) => {
   const modalRef = useRef<HTMLDialogElement>(null);
   const transferModalRef = useRef<HTMLDialogElement>(null);
-
-  const [searchTerm, setsearchTerm] = useState("");
 
   useEffect(() => {
     if (isTopupOpen && modalRef.current) {
@@ -196,13 +197,14 @@ const CustomModal = ({
                 </div>
                 <div className="relative">
                   <CustomInput
-                    id="search-contact"
+                    id="transfer-amount"
                     type="text"
                     label=""
                     placeholder="Masukan Nominal Transfer..."
                     leftIcon="i-material-symbols-search"
-                    value={searchTerm}
-                    onChange={() => {}}
+                    value={transferAmount}
+                    onChange={(e) => setTransferAmount(e.target.value)}
+                    isInvalid={isInvalid}
                   />
                 </div>
                 <CustomButton
@@ -212,7 +214,8 @@ const CustomModal = ({
                   title="Lanjutkan Transfer"
                   leftIcon="i-material-symbols-send-rounded"
                   containerStyles="items-center w-full"
-                  onClick={() => {}}
+                  onClick={onTransfer}
+                  isDisabled={isInvalid || !transferAmount}
                 />
               </form>
             )}

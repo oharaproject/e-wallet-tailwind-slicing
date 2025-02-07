@@ -13,6 +13,9 @@ import {
   SearchContactModal,
 } from "@/components";
 
+const MAX_DAILY_TRANSFER = 100000000;
+const MIN_REMAINING_BALANCE = 50000;
+
 export default function Dashboard() {
   // topup state
   const [isVisible, setIsVisible] = useState(true);
@@ -29,6 +32,8 @@ export default function Dashboard() {
     account: string;
   } | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [transferAmount, setTransferAmount] = useState("");
+  const [isAmountInvalid, setIsAmountInvalid] = useState(false);
 
   useEffect(() => {
     console.log("Modal state changed:", isTopupOpen, isTransferOpen);
@@ -64,6 +69,64 @@ export default function Dashboard() {
     setIsTransferSearchOpen(false);
     setIsTransferOpen(true);
     console.log("isTransferOpen after select contact:", isTransferOpen);
+  };
+
+  // const handleTransferAmountChange = (
+  //   e: React.ChangeEvent<HTMLInputElement>
+  // ) => {
+  //   const value = e.target.value.replace(/\D/g, "");
+  //   setTransferAmount(value);
+
+  //   const amount = parseInt(value, 10);
+  //   if (isNaN(amount)) {
+  //     setIsAmountInvalid(true);
+  //     return;
+  //   }
+
+  //   if (amount > MAX_DAILY_TRANSFER) {
+  //     alert("Maksimal transfer per hari adalah Rp 100.000.000");
+  //     setIsAmountInvalid(true);
+  //   } else if (amount > balance) {
+  //     alert("Saldo tidak mencukupi untuk melakukan transfer ini");
+  //     setIsAmountInvalid(true);
+  //   } else if (balance - amount < MIN_REMAINING_BALANCE) {
+  //     alert(`Saldo minimun setelah transfer harus Rp ${MIN_REMAINING_BALANCE}`);
+  //     setIsAmountInvalid(true);
+  //   } else {
+  //     setIsAmountInvalid(false);
+  //   }
+  // };
+
+  const handleTransfer = () => {
+    const value = transferAmount.replace(/\D/g, "");
+    setTransferAmount(value);
+
+    const amount = parseInt(value, 10);
+    if (isNaN(amount)) {
+      setIsAmountInvalid(true);
+      return;
+    }
+
+    if (amount > MAX_DAILY_TRANSFER) {
+      alert("Maksimal transfer per hari adalah Rp 100.000.000");
+      setIsAmountInvalid(true);
+    } else if (amount > balance) {
+      alert("Saldo tidak mencukupi untuk melakukan transfer ini");
+      setIsAmountInvalid(true);
+    } else if (balance - amount < MIN_REMAINING_BALANCE) {
+      alert(`Saldo minimun setelah transfer harus Rp ${MIN_REMAINING_BALANCE}`);
+      setIsAmountInvalid(true);
+    } else {
+      setIsAmountInvalid(false);
+    }
+
+    if (isAmountInvalid && transferAmount) {
+      const amount = parseInt(transferAmount, 10);
+      setBalance((prev) => prev - amount);
+      alert("Transfer berhasil!");
+      setIsTransferOpen(false);
+      setTransferAmount("");
+    }
   };
 
   return (
@@ -188,7 +251,10 @@ export default function Dashboard() {
           onClose={() => setIsTransferOpen(false)}
           selectedContact={selectedContact}
           setSelectedContact={setSelectedContact}
-          isInvalid={isInvalid}
+          isInvalid={isAmountInvalid}
+          transferAmount={transferAmount}
+          setTransferAmount={setTransferAmount}
+          onTransfer={handleTransfer}
           topupAmount=""
           setTopupAmount={() => {}}
           onTopup={() => {}}
