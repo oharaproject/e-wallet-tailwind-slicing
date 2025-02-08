@@ -43,6 +43,24 @@ export default function Dashboard() {
     setIsVisible(!isVisible);
   };
 
+  const handleTopupAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, "");
+    setTopupAmount(value);
+
+    if (value && parseInt(value, 10) <= 10000) {
+      setIsInvalid(false);
+    } else {
+      setIsInvalid(true);
+    }
+
+    const amount = parseInt(value, 10);
+    if (amount <= 10000) {
+      setIsInvalid(true);
+    } else {
+      setIsInvalid(false);
+    }
+  };
+
   const handleTopup = () => {
     const amount = parseInt(topupAmount.replace(/^0+/, ""), 10);
 
@@ -55,6 +73,7 @@ export default function Dashboard() {
     setBalance((prev) => prev + amount);
     setIsTopupOpen(false);
     setTopupAmount("");
+    setIsInvalid(false);
   };
 
   const handleTransferClick = () => {
@@ -71,42 +90,19 @@ export default function Dashboard() {
     console.log("isTransferOpen after select contact:", isTransferOpen);
   };
 
-  // const handleTransferAmountChange = (
-  //   e: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   const value = e.target.value.replace(/\D/g, "");
-  //   setTransferAmount(value);
-
-  //   const amount = parseInt(value, 10);
-  //   if (isNaN(amount)) {
-  //     setIsAmountInvalid(true);
-  //     return;
-  //   }
-
-  //   if (amount > MAX_DAILY_TRANSFER) {
-  //     alert("Maksimal transfer per hari adalah Rp 100.000.000");
-  //     setIsAmountInvalid(true);
-  //   } else if (amount > balance) {
-  //     alert("Saldo tidak mencukupi untuk melakukan transfer ini");
-  //     setIsAmountInvalid(true);
-  //   } else if (balance - amount < MIN_REMAINING_BALANCE) {
-  //     alert(`Saldo minimun setelah transfer harus Rp ${MIN_REMAINING_BALANCE}`);
-  //     setIsAmountInvalid(true);
-  //   } else {
-  //     setIsAmountInvalid(false);
-  //   }
-  // };
-
-  const handleTransfer = () => {
-    const value = transferAmount.replace(/\D/g, "");
+  const handleTransferAmountChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    console.log("User input:", e.target.value);
+    const value = e.target.value.replace(/\D/g, "");
     setTransferAmount(value);
 
-    const amount = parseInt(value, 10);
-    if (isNaN(amount)) {
-      setIsAmountInvalid(true);
+    if (!value || isNaN(parseInt(value, 10))) {
+      setIsAmountInvalid(false);
       return;
     }
 
+    const amount = parseInt(value, 10);
     if (amount > MAX_DAILY_TRANSFER) {
       alert("Maksimal transfer per hari adalah Rp 100.000.000");
       setIsAmountInvalid(true);
@@ -119,13 +115,16 @@ export default function Dashboard() {
     } else {
       setIsAmountInvalid(false);
     }
+  };
 
-    if (isAmountInvalid && transferAmount) {
+  const handleTransfer = () => {
+    if (!isAmountInvalid && transferAmount) {
       const amount = parseInt(transferAmount, 10);
       setBalance((prev) => prev - amount);
       alert("Transfer berhasil!");
       setIsTransferOpen(false);
       setTransferAmount("");
+      setIsAmountInvalid(false);
     }
   };
 
@@ -220,6 +219,8 @@ export default function Dashboard() {
           topupAmount={topupAmount}
           setTopupAmount={setTopupAmount}
           onTopup={handleTopup}
+          onTopupAmountChange={handleTopupAmountChange}
+          isInvalid={isInvalid}
         />
       )}
 
@@ -251,9 +252,10 @@ export default function Dashboard() {
           onClose={() => setIsTransferOpen(false)}
           selectedContact={selectedContact}
           setSelectedContact={setSelectedContact}
-          isInvalid={isAmountInvalid}
+          isAmountInvalid={isAmountInvalid}
           transferAmount={transferAmount}
           setTransferAmount={setTransferAmount}
+          onTransferAmountChange={handleTransferAmountChange}
           onTransfer={handleTransfer}
           topupAmount=""
           setTopupAmount={() => {}}

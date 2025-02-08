@@ -17,11 +17,12 @@ const CustomModal = ({
   isInvalid,
   onClose,
   topupAmount,
-  setTopupAmount,
   onTopup,
   transferAmount,
-  setTransferAmount,
+  onTopupAmountChange,
+  onTransferAmountChange,
   onTransfer,
+  isAmountInvalid,
 }: CustomModalProps) => {
   const modalRef = useRef<HTMLDialogElement>(null);
   const transferModalRef = useRef<HTMLDialogElement>(null);
@@ -35,6 +36,7 @@ const CustomModal = ({
   }, [isTopupOpen]);
 
   useEffect(() => {
+    console.log("isTransferOpen in CustomModal:", isTransferOpen);
     if (isTransferOpen && transferModalRef.current) {
       transferModalRef.current.showModal();
     } else if (transferModalRef.current) {
@@ -115,7 +117,7 @@ const CustomModal = ({
                     placeholder="Nominal Rupiah"
                     leftIcon="i-material-symbols-account-balance-wallet"
                     value={topupAmount}
-                    onChange={(e) => setTopupAmount(e.target.value)}
+                    onChange={onTopupAmountChange}
                     isInvalid={isInvalid}
                   />
                 </div>
@@ -203,8 +205,8 @@ const CustomModal = ({
                     placeholder="Masukan Nominal Transfer..."
                     leftIcon="i-material-symbols-search"
                     value={transferAmount}
-                    onChange={(e) => setTransferAmount(e.target.value)}
-                    isInvalid={isInvalid}
+                    onChange={onTransferAmountChange}
+                    isInvalid={isAmountInvalid}
                   />
                 </div>
                 <CustomButton

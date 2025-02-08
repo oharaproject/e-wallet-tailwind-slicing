@@ -82,7 +82,7 @@ export interface SelectContactModalProps {
 export interface CustomModalProps {
   // topup
   isTopupOpen?: boolean;
-  setIsTopupOpen?: (open: boolean) => void;
+  setIsTopupOpen?: (value: boolean) => void;
   topupAmount: string;
   setTopupAmount: (value: string) => void;
   onTopup: () => void;
@@ -105,6 +105,8 @@ export interface CustomModalProps {
   // transfer amount
   transferAmount: string;
   setTransferAmount: (value: string) => void;
-
+  onTransferAmountChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onTopupAmountChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onTransfer: () => void;
+  isAmountInvalid: boolean;
 }
