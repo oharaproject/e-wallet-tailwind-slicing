@@ -23,7 +23,7 @@ const CustomModal = ({
   onTransferAmountChange,
   onTransfer,
   isAmountInvalid,
-}: CustomModalProps) => {
+}: Partial<CustomModalProps>) => {
   const modalRef = useRef<HTMLDialogElement>(null);
   const transferModalRef = useRef<HTMLDialogElement>(null);
 
@@ -65,7 +65,7 @@ const CustomModal = ({
   };
 
   const handleOpenSearchContact = () => {
-    setIsOpen(true);
+    setIsOpen?.(true);
   };
 
   return (
@@ -116,8 +116,8 @@ const CustomModal = ({
                     label=""
                     placeholder="Nominal Rupiah"
                     leftIcon="i-material-symbols-account-balance-wallet"
-                    value={topupAmount}
-                    onChange={onTopupAmountChange}
+                    value={topupAmount || ""}
+                    onChange={onTopupAmountChange || (() => {})}
                     isInvalid={isInvalid}
                   />
                 </div>
@@ -192,7 +192,7 @@ const CustomModal = ({
                   <a
                     href="#"
                     className="text-xs font-semibold text-brands-light-green hover:text-brands-light-green/70 focus:outline-none focus:ring-2 focus:ring-green-400"
-                    onClick={() => setIsOpen(true)}
+                    onClick={() => setIsOpen?.(true)}
                   >
                     Cari Kontak
                   </a>
@@ -204,8 +204,8 @@ const CustomModal = ({
                     label=""
                     placeholder="Masukan Nominal Transfer..."
                     leftIcon="i-material-symbols-search"
-                    value={transferAmount}
-                    onChange={onTransferAmountChange}
+                    value={transferAmount || ""}
+                    onChange={onTransferAmountChange || (() => {})}
                     isInvalid={isAmountInvalid}
                   />
                 </div>

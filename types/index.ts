@@ -84,29 +84,29 @@ export interface CustomModalProps {
   isTopupOpen?: boolean;
   setIsTopupOpen?: (value: boolean) => void;
   topupAmount: string;
-  setTopupAmount: (value: string) => void;
-  onTopup: () => void;
+  setTopupAmount?: (value: string) => void;
+  onTopup?: () => void;
 
   // transfer
   isOpen?: boolean;
-  setIsOpen: (value: boolean) => void;
+  setIsOpen?: (value: boolean) => void;
   isTransferOpen?: boolean;
   setIsTransferOpen?: (open: boolean) => void;
-  contactData?: { name: string; account: string; icon: string }[];
+  // contactData?: { name: string; account: string; icon: string }[];
 
   setSelectedContact?: (
     contact: { name: string; account: string } | null
   ) => void;
 
-  onClose: () => void;
-  selectedContact: { name: string; account: string } | null;
-  isInvalid: boolean;
+  onClose?: () => void;
+  selectedContact?: { name: string; account: string } | null;
+  isInvalid?: boolean;
 
   // transfer amount
   transferAmount: string;
-  setTransferAmount: (value: string) => void;
-  onTransferAmountChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onTopupAmountChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onTransfer: () => void;
-  isAmountInvalid: boolean;
+  setTransferAmount?: (value: string) => void;
+  onTransferAmountChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onTopupAmountChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onTransfer?: () => void;
+  isAmountInvalid?: boolean;
 }
