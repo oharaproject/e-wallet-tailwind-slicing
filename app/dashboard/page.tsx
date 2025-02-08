@@ -121,6 +121,25 @@ export default function Dashboard() {
     if (!isAmountInvalid && transferAmount) {
       const amount = parseInt(transferAmount, 10);
       setBalance((prev) => prev - amount);
+
+      const formattedDate = new Date().toLocaleDateString("id-ID", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+
+      const newTransaction = {
+        id: transactionData.length + 1,
+        iconClass: "i-material-symbols-download-rounded",
+        title: selectedContact?.name || "Unknown",
+        description: formattedDate,
+        rightText: -amount,
+        href: "#",
+      };
+
+      transactionData.push(newTransaction);
+
       alert("Transfer berhasil!");
       setIsTransferOpen(false);
       setTransferAmount("");
