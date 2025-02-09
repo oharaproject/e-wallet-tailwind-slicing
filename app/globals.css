@@ -276,7 +276,7 @@
 /* statu transaction content style */
 
 .status-content {
-  @apply absolute mt-[92px] flex flex-col w-full gap-10 p-4;
+  @apply mt-[70px] flex flex-col w-full gap-10 p-4;
 }
 
 /* status title & description style */

@@ -66,14 +66,14 @@ export const userData = {
 };
 
 export const transactionStatusData = {
-  transactionId: "KS08387847",
+  transactionId: "#KS08387847",
   amount: -300000,
   category: "Uang Keluar",
   recipient: "Jane Dane",
   bank: "BCA",
   accountNumber: "594576747746",
   transactionTime: "20 Juni 2024 19:00 WIB",
-  status: "Transaksi Dibatalkan",
+  status: "Transaksi Sedang Diproses",
 };
 
 export const statusConfig: Record<
@@ -243,30 +243,35 @@ export const contactData = [
     id: 1,
     name: "Jonathon Bayer",
     account: "257475257",
+    bank: "BCA",
     iconClass: "i-material-symbols-person-outline-rounded",
   },
   {
     id: 2,
     name: "Carrie Hill",
     account: "289757327",
+    bank: "BRI",
     iconClass: "i-material-symbols-person-outline-rounded",
   },
   {
     id: 3,
     name: "Caleb Wolff",
     account: "259747527",
+    bank: "Jago",
     iconClass: "i-material-symbols-person-outline-rounded",
   },
   {
     id: 4,
     name: "Lynda Boer",
     account: "289747537",
+    bank: "Muamalat",
     iconClass: "i-material-symbols-person-outline-rounded",
   },
   {
     id: 5,
     name: "Jose Spinka",
     account: "289757547",
+    bank: "Mandiri",
     iconClass: "i-material-symbols-person-outline-rounded",
   },
 ];

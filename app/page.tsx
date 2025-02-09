@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { transactionData, userData } from "@/constants";
+import { contactData, transactionData, userData } from "@/constants";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   CustomButton,
   CardList,
@@ -16,7 +17,26 @@ import {
 const MAX_DAILY_TRANSFER = 100000000;
 const MIN_REMAINING_BALANCE = 50000;
 
+type TransactionData = {
+  id: string;
+  iconClass: string;
+  title: string;
+  transactionTime: string;
+  amount: number;
+  href: string;
+  rightText?: number;
+  category: string;
+  recipient: string;
+  bank: string;
+  accountNumber: string;
+  status: string;
+  description?: string;
+};
+
 export default function Dashboard() {
+  const [isClient, setIsClient] = useState(false);
+  // const [router, setRouter] = useState<any>(null);
+
   // topup state
   const [isVisible, setIsVisible] = useState(true);
   const [isTopupOpen, setIsTopupOpen] = useState(false);
@@ -34,6 +54,24 @@ export default function Dashboard() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [transferAmount, setTransferAmount] = useState("");
   const [isAmountInvalid, setIsAmountInvalid] = useState(false);
+
+  // transaction data
+  const [transactionData, setTransactionData] = useState<TransactionData[]>([]);
+
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
+
+  // useEffect(() => {
+  //   if (isClient) {
+  //     const routerInstance = useRouter();
+  //     setRouter(routerInstance);
+  //   }
+  // }, [isClient]);
+
+  // if (!router) {
+  //   return <p>Loading...</p>;
+  // }
 
   useEffect(() => {
     console.log("Modal state changed:", isTopupOpen, isTransferOpen);
@@ -122,6 +160,8 @@ export default function Dashboard() {
       const amount = parseInt(transferAmount, 10);
       setBalance((prev) => prev - amount);
 
+      const transactionID = "#K" + Math.floor(Math.random() * 1000000000);
+
       const formattedDate = new Date().toLocaleDateString("id-ID", {
         weekday: "long",
         year: "numeric",
@@ -129,18 +169,35 @@ export default function Dashboard() {
         day: "numeric",
       });
 
-      const newTransaction = {
-        id: transactionData.length + 1,
+      const selectedContactData = contactData.find(
+        (contact) => contact.account === selectedContact?.account
+      );
+
+      const newTransaction: TransactionData = {
+        id: transactionID,
         iconClass: "i-material-symbols-download-rounded",
         title: selectedContact?.name || "Unknown",
         description: formattedDate,
         rightText: -amount,
         href: "#",
+        amount: -amount,
+        category: "Uang Keluar",
+        recipient: selectedContact?.name || "Unknown",
+        bank: selectedContactData?.bank || "Unknown",
+        accountNumber: selectedContact?.account || "Unknown",
+        transactionTime: formattedDate + " " + new Date().toLocaleString(),
+        status: "Transaksi Sedang Diproses",
       };
 
-      transactionData.push(newTransaction);
+      // transactionData.push(newTransaction);
+      setTransactionData((prevData) => [...prevData, newTransaction]);
 
-      alert("Transfer berhasil!");
+      router.push({
+        pathname: "/status-transaction",
+        query: { newTransaction: JSON.stringify(newTransaction) },
+      });
+
+      // alert("Transfer berhasil!");
       setIsTransferOpen(false);
       setTransferAmount("");
       setIsAmountInvalid(false);
@@ -215,8 +272,8 @@ export default function Dashboard() {
             <ListItem
               iconClass={item.iconClass}
               title={item.title}
-              description={item.description}
-              rightText={item.rightText}
+              description={item.transactionTime}
+              rightText={item.amount}
               href={item.href}
             />
             {index !== transactionData.length - 1 && (
