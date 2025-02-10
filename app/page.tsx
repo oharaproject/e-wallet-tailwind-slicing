@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { contactData, transactionData, userData } from "@/constants";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import { contactData, userData } from "@/constants";
+import Link from "next/link";
 import {
   CustomButton,
   CardList,
@@ -14,28 +14,22 @@ import {
   SearchContactModal,
 } from "@/components";
 
-const MAX_DAILY_TRANSFER = 100000000;
-const MIN_REMAINING_BALANCE = 50000;
-
 type TransactionData = {
   id: string;
-  iconClass: string;
-  title: string;
-  transactionTime: string;
   amount: number;
-  href: string;
-  rightText?: number;
   category: string;
   recipient: string;
   bank: string;
   accountNumber: string;
+  transactionTime: string;
   status: string;
-  description?: string;
 };
 
+const MAX_DAILY_TRANSFER = 100000000;
+const MIN_REMAINING_BALANCE = 50000;
+
 export default function Dashboard() {
-  const [isClient, setIsClient] = useState(false);
-  // const [router, setRouter] = useState<any>(null);
+  const router = useRouter();
 
   // topup state
   const [isVisible, setIsVisible] = useState(true);
@@ -55,23 +49,7 @@ export default function Dashboard() {
   const [transferAmount, setTransferAmount] = useState("");
   const [isAmountInvalid, setIsAmountInvalid] = useState(false);
 
-  // transaction data
   const [transactionData, setTransactionData] = useState<TransactionData[]>([]);
-
-  // useEffect(() => {
-  //   setIsClient(true);
-  // }, []);
-
-  // useEffect(() => {
-  //   if (isClient) {
-  //     const routerInstance = useRouter();
-  //     setRouter(routerInstance);
-  //   }
-  // }, [isClient]);
-
-  // if (!router) {
-  //   return <p>Loading...</p>;
-  // }
 
   useEffect(() => {
     console.log("Modal state changed:", isTopupOpen, isTransferOpen);
@@ -160,8 +138,6 @@ export default function Dashboard() {
       const amount = parseInt(transferAmount, 10);
       setBalance((prev) => prev - amount);
 
-      const transactionID = "#K" + Math.floor(Math.random() * 1000000000);
-
       const formattedDate = new Date().toLocaleDateString("id-ID", {
         weekday: "long",
         year: "numeric",
@@ -169,27 +145,30 @@ export default function Dashboard() {
         day: "numeric",
       });
 
+      const transactionId = "#K" + Math.floor(Math.random() * 1000000000);
+
       const selectedContactData = contactData.find(
         (contact) => contact.account === selectedContact?.account
       );
 
       const newTransaction: TransactionData = {
-        id: transactionID,
-        iconClass: "i-material-symbols-download-rounded",
-        title: selectedContact?.name || "Unknown",
-        description: formattedDate,
-        rightText: -amount,
-        href: "#",
+        id: transactionId,
         amount: -amount,
         category: "Uang Keluar",
         recipient: selectedContact?.name || "Unknown",
         bank: selectedContactData?.bank || "Unknown",
         accountNumber: selectedContact?.account || "Unknown",
-        transactionTime: formattedDate + " " + new Date().toLocaleString(),
+        transactionTime: formattedDate + " " + new Date().toLocaleTimeString(),
         status: "Transaksi Sedang Diproses",
       };
 
+      // iconClass: "i-material-symbols-download-rounded",
+      // title: selectedContact?.name || "Unknown",
+      // description: formattedDate,
+      // rightText: -amount,
+      // href: "#",
       // transactionData.push(newTransaction);
+
       setTransactionData((prevData) => [...prevData, newTransaction]);
 
       router.push({
@@ -272,8 +251,8 @@ export default function Dashboard() {
             <ListItem
               iconClass={item.iconClass}
               title={item.title}
-              description={item.transactionTime}
-              rightText={item.amount}
+              description={item.description}
+              rightText={item.rightText}
               href={item.href}
             />
             {index !== transactionData.length - 1 && (

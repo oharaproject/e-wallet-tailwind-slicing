@@ -1,67 +1,43 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Appbar, CustomButton, Navbar } from "@/components";
-import { transactionStatusData, statusConfig } from "@/constants";
+import React from "react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { Appbar, CustomButton, Navbar } from "@/components";
+import { statusConfig } from "@/constants";
 
 export default function StatusTransaction() {
-  const [isClient, setIsClient] = useState(false);
-  const [router, setRouter] = useState<any>(null);
-  const [status, setStatus] = useState("Transaksi Sedang Diproses");
-  const [transactionData, setTransactionData] =
-    useState<TransactionData | null>(null);
-
-  type TransactionData = {
-    id: string;
-    iconClass: string;
-    title: string;
-    transactionTime: string;
-    amount: number;
-    href: string;
-    category: string;
-    recipient: string;
-    bank: string;
-    accountNumber: string;
-  };
-  // const {
-  //   transactionId,
-  //   amount,
-  //   category,
-  //   recipient,
-  //   bank,
-  //   accountNumber,
-  //   transactionTime,
-  //   status,
-  // } = transactionStatusData;
+  const router = useRouter();
+  const { newTransaction } = router.query;
+  const [transactionStatus, setTransactionStatus] = useState(null);
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    if (newTransaction) {
+      const parsedData = JSON.parse(newTransaction as string);
+      setTransactionStatus(parsedData);
 
-  // useEffect(() => {
-  //   if (isClient) {
-  //     // const routerInstance = useRouter();
-  //     setRouter(routerInstance);
-  //   }
-  // }, [isClient]);
-
-  useEffect(() => {
-    if (router && router.query.newTransaction) {
-      const data = router.query.newTransaction;
-      if (data) {
-        const parsedData: TransactionData = JSON.parse(data as string);
-        setTransactionData(parsedData);
-
-        setTimeout(() => {
-          setStatus("Transaksi Berhasil Diproses");
-        }, 10000);
-      }
+      setTimeout(() => {
+        setTransactionStatus((prevState: any) => ({
+          ...prevState,
+          status: "Transaksi Berhasil Diproses",
+        }));
+      }, 10000);
     }
-  }, [router]);
+  }, [newTransaction]);
 
-  if (!transactionData) {
-    return <p>Loading...</p>;
+  if (!transactionStatus) {
+    return <p>Loading...</p>; /
   }
+
+  const {
+    transactionId,
+    amount,
+    category,
+    recipient,
+    bank,
+    accountNumber,
+    transactionTime,
+    status,
+  } = transactionStatus;
 
   const { backgroundColor, textColor, buttonTitle, icon, statusDescription } =
     statusConfig[status] || {
@@ -72,29 +48,12 @@ export default function StatusTransaction() {
       statusDescription: null,
     };
 
-  useEffect(() => {
-    const data = router.query.newTransaction;
-
-    if (data) {
-      const parsedData: TransactionData = JSON.parse(data as string);
-      setTransactionData(parsedData);
-
-      setTimeout(() => {
-        setStatus("Transaksi Berhasil Diproses");
-      }, 10000);
-    }
-  }, [router.query]);
-
-  if (!transactionData) {
-    return <p>Loading...</p>;
-  }
-
   const formattedAmount =
-    typeof transactionData.amount === "number"
-      ? `${transactionData.amount < 0 ? "- " : ""}Rp ${new Intl.NumberFormat(
-          "id-ID"
-        ).format(Math.abs(transactionData.amount))}`
-      : transactionData.amount;
+    typeof amount === "number"
+      ? `${amount < 0 ? "- " : ""}Rp ${new Intl.NumberFormat("id-ID").format(
+          Math.abs(amount)
+        )}`
+      : amount;
 
   return (
     <div className="transaction-container relative">
@@ -115,32 +74,28 @@ export default function StatusTransaction() {
         </div>
 
         <div className="detail-transaction-container">
-          <p className="id-transaction">{`ID Transaksi ${transactionData.id}`}</p>
+          <p className="id-transaction">{`ID Transaksi ${transactionId}`}</p>
           <p className="amount">{formattedAmount}</p>
           <div className="flex flex-col gap-2">
             <div className="subcontainer">
               <p className="status-subtitle">Kategori</p>
-              <p className="detail-transaction">{transactionData.category}</p>
+              <p className="detail-transaction">{category}</p>
             </div>
             <div className="subcontainer">
               <p className="status-subtitle">Penerima</p>
-              <p className="detail-transaction">{transactionData.recipient}</p>
+              <p className="detail-transaction">{recipient}</p>
             </div>
             <div className="subcontainer">
               <p className="status-subtitle">Bank Penerima</p>
-              <p className="detail-transaction">{transactionData.bank}</p>
+              <p className="detail-transaction">{bank}</p>
             </div>
             <div className="subcontainer">
               <p className="status-subtitle">Nomor Rekening</p>
-              <p className="detail-transaction">
-                {transactionData.accountNumber}
-              </p>
+              <p className="detail-transaction">{accountNumber}</p>
             </div>
             <div className="subcontainer">
               <p className="status-subtitle">Waktu Transaksi</p>
-              <p className="detail-transaction">
-                {transactionData.transactionTime}
-              </p>
+              <p className="detail-transaction">{transactionTime}</p>
             </div>
           </div>
         </div>
