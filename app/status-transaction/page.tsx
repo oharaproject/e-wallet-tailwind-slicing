@@ -1,31 +1,50 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Appbar, CustomButton, Navbar } from "@/components";
 import { statusConfig } from "@/constants";
 
+interface TransactionStatus {
+  transactionId: string;
+  amount: number;
+  category: string;
+  recipient: string;
+  bank: string;
+  accountNumber: string;
+  transactionTime: string;
+  status: string;
+}
+
 export default function StatusTransaction() {
-  const router = useRouter();
-  const { newTransaction } = router.query;
-  const [transactionStatus, setTransactionStatus] = useState(null);
+  const searchParams = useSearchParams();
+  const newTransaction = searchParams.get("newTransaction");
+
+  const [transactionStatus, setTransactionStatus] =
+    useState<TransactionStatus | null>(null);
 
   useEffect(() => {
     if (newTransaction) {
-      const parsedData = JSON.parse(newTransaction as string);
-      setTransactionStatus(parsedData);
+      try {
+        const parsedData: TransactionStatus = JSON.parse(
+          decodeURIComponent(newTransaction)
+        );
+        setTransactionStatus(parsedData);
 
-      setTimeout(() => {
-        setTransactionStatus((prevState: any) => ({
-          ...prevState,
-          status: "Transaksi Berhasil Diproses",
-        }));
-      }, 10000);
+        setTimeout(() => {
+          setTransactionStatus((prevState) => ({
+            ...prevState!,
+            status: "Transaksi Berhasil Diproses",
+          }));
+        }, 10000);
+      } catch (error) {
+        console.error("Failed to parse newTransaction:", error);
+      }
     }
   }, [newTransaction]);
 
   if (!transactionStatus) {
-    return <p>Loading...</p>; /
+    return <p>Loading...</p>;
   }
 
   const {

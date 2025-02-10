@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { contactData, userData } from "@/constants";
 import Link from "next/link";
@@ -171,10 +171,16 @@ export default function Dashboard() {
 
       setTransactionData((prevData) => [...prevData, newTransaction]);
 
-      router.push({
-        pathname: "/status-transaction",
-        query: { newTransaction: JSON.stringify(newTransaction) },
-      });
+      // router.push({
+      //   pathname: "/status-transaction",
+      //   query: { newTransaction: JSON.stringify(newTransaction) },
+      // });
+
+      router.push(
+        `/status-transaction?newTransaction=${encodeURIComponent(
+          JSON.stringify(newTransaction)
+        )}`
+      );
 
       // alert("Transfer berhasil!");
       setIsTransferOpen(false);
