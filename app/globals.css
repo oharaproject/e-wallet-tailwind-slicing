@@ -399,7 +399,7 @@
 /* PAGE TRANSACTION HISTORY STYLES */
 
 .transaction-history {
-  @apply rounded-s-2xl bg-white shadow-md mt-20 overflow-hidden rounded-2xl px-2.5;
+  @apply rounded-s-2xl bg-white shadow-md mt-20 overflow-hidden rounded-2xl p-2.5;
 }
 
 .notransaction-text {

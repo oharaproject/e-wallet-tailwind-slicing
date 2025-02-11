@@ -76,7 +76,14 @@ export default function StatusTransaction() {
       : amount;
 
   const handleRedirect = () => {
-    router.push("/");
+    if (transactionStatus) {
+      if (transactionStatus.status === "Transaksi Berhasil Diproses") {
+        router.push("/");
+      } else {
+        localStorage.removeItem("recentTransaction");
+        router.push("/");
+      }
+    }
   };
 
   return (

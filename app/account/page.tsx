@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Appbar, CustomButton, ListItem } from "@/components";
+import { Appbar, CustomButton, ListItem, Navbar } from "@/components";
 import Image from "next/image";
 import { accountMenuItems, userData } from "@/constants";
 import { useRouter } from "next/navigation";
@@ -64,6 +64,10 @@ export default function Account() {
           containerStyles="text-brands-light-green border-brands-light-green"
           onClick={() => alert("Logout")}
         />
+      </div>
+
+      <div className="navbar-container">
+        <Navbar />
       </div>
     </div>
   );
