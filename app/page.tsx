@@ -15,7 +15,7 @@ import {
 } from "@/components";
 
 type TransactionData = {
-  id: string;
+  transactionId: string;
   amount: number;
   category: string;
   recipient: string;
@@ -54,6 +54,21 @@ export default function Dashboard() {
   useEffect(() => {
     console.log("Modal state changed:", isTopupOpen, isTransferOpen);
   }, [isTopupOpen, isTransferOpen]);
+
+  //ambil data dari localStorage || simulasi transfer
+  useEffect(() => {
+    const recentTransaction = localStorage.getItem("recentTransaction");
+    if (recentTransaction) {
+      const parsedTransaction = JSON.parse(recentTransaction);
+      setTransactionData((prevData) => [...prevData, parsedTransaction]);
+
+      setBalance(
+        (prevBalance) => prevBalance - Math.abs(parsedTransaction.amount)
+      );
+
+      localStorage.removeItem("recentTransaction");
+    }
+  }, []);
 
   const handleVisibilityToggle = () => {
     setIsVisible(!isVisible);
@@ -136,7 +151,8 @@ export default function Dashboard() {
   const handleTransfer = () => {
     if (!isAmountInvalid && transferAmount) {
       const amount = parseInt(transferAmount, 10);
-      setBalance((prev) => prev - amount);
+      const newBalance = balance - amount;
+      setBalance(newBalance);
 
       const formattedDate = new Date().toLocaleDateString("id-ID", {
         weekday: "long",
@@ -152,7 +168,7 @@ export default function Dashboard() {
       );
 
       const newTransaction: TransactionData = {
-        id: transactionId,
+        transactionId: transactionId,
         amount: -amount,
         category: "Uang Keluar",
         recipient: selectedContact?.name || "Unknown",
@@ -171,10 +187,8 @@ export default function Dashboard() {
 
       setTransactionData((prevData) => [...prevData, newTransaction]);
 
-      // router.push({
-      //   pathname: "/status-transaction",
-      //   query: { newTransaction: JSON.stringify(newTransaction) },
-      // });
+      // Simpan data ke localStorage || simulasi proses transfer
+      localStorage.setItem("recentTransaction", JSON.stringify(newTransaction));
 
       router.push(
         `/status-transaction?newTransaction=${encodeURIComponent(
@@ -182,7 +196,6 @@ export default function Dashboard() {
         )}`
       );
 
-      // alert("Transfer berhasil!");
       setIsTransferOpen(false);
       setTransferAmount("");
       setIsAmountInvalid(false);
@@ -253,13 +266,13 @@ export default function Dashboard() {
 
       <CardList title="Riwayat Transaksi" linkText="Lihat Lainnya" linkHref="#">
         {transactionData.map((item, index) => (
-          <div key={item.id}>
+          <div key={item.transactionId}>
             <ListItem
-              iconClass={item.iconClass}
-              title={item.title}
-              description={item.description}
-              rightText={item.rightText}
-              href={item.href}
+              iconClass="i-material-symbols-download-rounded"
+              title={item.recipient}
+              description={item.transactionTime}
+              rightText={item.amount}
+              href="#"
             />
             {index !== transactionData.length - 1 && (
               <div className="divider"></div>

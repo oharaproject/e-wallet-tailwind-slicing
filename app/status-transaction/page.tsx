@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { Appbar, CustomButton, Navbar } from "@/components";
 import { statusConfig } from "@/constants";
 
@@ -17,6 +17,7 @@ interface TransactionStatus {
 }
 
 export default function StatusTransaction() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const newTransaction = searchParams.get("newTransaction");
 
@@ -36,7 +37,7 @@ export default function StatusTransaction() {
             ...prevState!,
             status: "Transaksi Berhasil Diproses",
           }));
-        }, 10000);
+        }, 2000);
       } catch (error) {
         console.error("Failed to parse newTransaction:", error);
       }
@@ -73,6 +74,10 @@ export default function StatusTransaction() {
           Math.abs(amount)
         )}`
       : amount;
+
+  const handleRedirect = () => {
+    router.push("/");
+  };
 
   return (
     <div className="transaction-container relative">
@@ -126,6 +131,7 @@ export default function StatusTransaction() {
           title={buttonTitle}
           leftIcon={`${icon} text-icon-md`}
           containerStyles=""
+          onClick={handleRedirect}
         />
       </div>
 
