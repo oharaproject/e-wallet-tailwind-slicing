@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useEffect, useState } from "react";
+import { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Appbar, CustomButton, Navbar, RocketLoading } from "@/components";
 import { statusConfig } from "@/constants";
@@ -16,7 +17,7 @@ interface TransactionStatus {
   status: string;
 }
 
-export default function StatusTransaction() {
+const StatusTransaction = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const newTransaction = searchParams.get("newTransaction");
@@ -152,5 +153,13 @@ export default function StatusTransaction() {
         <Navbar />
       </div>
     </div>
+  );
+};
+
+export default function Page() {
+  return (
+    <Suspense fallback={<RocketLoading />}>
+      <StatusTransaction />
+    </Suspense>
   );
 }
