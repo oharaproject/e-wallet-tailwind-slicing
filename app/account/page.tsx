@@ -34,7 +34,7 @@ export default function Account() {
             iconSize="lg"
             title="Tarik Saldo"
             leftIcon="i-material-symbols-account-balance-wallet"
-            onClick={() => router.push("/withdraw")}
+            onClick={() => router.push("/withdrawal")}
             containerStyles="flex-grow max-w-[200px] font-semibold "
           />
         </div>

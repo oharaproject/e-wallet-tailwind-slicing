@@ -2,7 +2,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Appbar, CustomButton, Navbar } from "@/components";
+import { Appbar, CustomButton, Navbar, RocketLoading } from "@/components";
 import { statusConfig } from "@/constants";
 
 interface TransactionStatus {
@@ -45,7 +45,13 @@ export default function StatusTransaction() {
   }, [newTransaction]);
 
   if (!transactionStatus) {
-    return <p>Loading...</p>;
+    return (
+      <div className="transaction-container relative">
+        <div className="flex mt-[70px] flex-col w-full items-center justify-center ">
+          <RocketLoading />
+        </div>
+      </div>
+    );
   }
 
   const {

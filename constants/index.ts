@@ -63,6 +63,7 @@ export const userData = {
   name: "John Doe",
   balance: 56094343,
   accountNumber: 29352335290375,
+  pin: 123456,
 };
 
 export const transactionStatusData = {
@@ -127,7 +128,7 @@ export const accountMenuItems = [
     title: "Pengaturan",
     description: "",
     rightText: "",
-    link: "/settings",
+    link: "/account-settings",
   },
   {
     id: 2,

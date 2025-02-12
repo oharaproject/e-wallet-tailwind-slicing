@@ -3,9 +3,7 @@ import { useState } from "react";
 import React from "react";
 import { Appbar, CustomInput, CustomButton, Navbar } from "@/components";
 import Link from "next/link";
-
-const AVAILABLE_BALANCE = 20000000;
-const CORRECT_PIN = "123456";
+import { userData } from "@/constants";
 
 export default function Withdrawal() {
   const [formData, setFormData] = useState({
@@ -24,7 +22,7 @@ export default function Withdrawal() {
     e.preventDefault();
 
     const nominal = parseInt(formData.nominal.replace(/\D/g, ""), 10);
-    const remainingBalance = AVAILABLE_BALANCE - nominal;
+    const remainingBalance = userData.balance - nominal;
 
     if (!formData.nominal || !formData.confirmPin) {
       alert("⚠ Harap isi semua bidang sebelum melanjutkan!");
@@ -41,7 +39,7 @@ export default function Withdrawal() {
       return;
     }
 
-    if (formData.confirmPin !== CORRECT_PIN) {
+    if (parseInt(formData.confirmPin, 10) !== userData.pin) {
       alert("⚠ PIN yang Anda masukkan salah!");
       return;
     }
@@ -66,7 +64,7 @@ export default function Withdrawal() {
             id="nominal"
             type="text"
             label="NOMINAL"
-            placeholder="Tersedia: Rp. 20.000.000"
+            placeholder={userData.balance.toLocaleString("id-ID")}
             leftIcon="i-material-symbols-account-balance-wallet"
             value={formData.nominal}
             onChange={(e) => handleChange("nominal", e.target.value)}

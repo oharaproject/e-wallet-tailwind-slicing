@@ -178,13 +178,6 @@ export default function Dashboard() {
         status: "Transaksi Sedang Diproses",
       };
 
-      // iconClass: "i-material-symbols-download-rounded",
-      // title: selectedContact?.name || "Unknown",
-      // description: formattedDate,
-      // rightText: -amount,
-      // href: "#",
-      // transactionData.push(newTransaction);
-
       setTransactionData((prevData) => [...prevData, newTransaction]);
 
       // Simpan data ke localStorage || simulasi proses transfer
